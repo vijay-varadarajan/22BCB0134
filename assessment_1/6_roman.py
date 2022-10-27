@@ -3,13 +3,15 @@ roman = ""
 
 places = []
 for i in range(len(str(dec)),0,-1):
-    places.append((dec % (10**(i))) - (dec % (10**(i-1))))
+    places.append((dec % (10**(i))) - (dec % (10**(i-1))))  
 
 expanded = []
 for i in range(len(places)):
+    
     if places[i] > 1000:
         expanded.append(places[i])
         continue
+    
     if '4' in str(places[i]):
         expanded.append((10**(len(places) - (i+1))))
         expanded.append(5*(10**(len(places) - (i+1))))
