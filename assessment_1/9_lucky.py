@@ -1,8 +1,8 @@
-dob = (input("Enter dob: "))
+dob = (input())
 sum = 0
 
 if len(dob) != 8:
-    print("Cannot be processed")
+    print("Invalid input")
 else:
     n = 0
     while n < 8:
@@ -13,7 +13,7 @@ else:
         sum += int(dob[n])
         n += 2
     
-    if int(str(sum)[-1]) == 0:
+    if sum % 10 == 0:
         print(f"{dob}, Lucky number")
     else:
         print(f"{dob}, Not a lucky number")

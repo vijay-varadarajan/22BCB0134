@@ -1,6 +1,6 @@
-total_classes = int(input("Total classes held: "))
-attended_classes = int(input("Number of classes attended: "))
-proof = int(input("Medical proof availability: "))
+total_classes = int(input())
+attended_classes = int(input())
+proof = int(input())
 
 percentage = (attended_classes / total_classes) * 100
 print(percentage)

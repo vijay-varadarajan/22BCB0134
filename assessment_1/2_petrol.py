@@ -1,10 +1,10 @@
-points = int(input("Storage points: "))
+points = int(input())
 litres = 0
 ml = 0
 
 for i in range(points):
-    litres += float(input(f"Litres from source {i+1}: "))
-    ml += float(input(f"Mls from source {i+1}: "))
+    litres += float(input())
+    ml += float(input())
 
     if ml >= 1000:
         litres += 1

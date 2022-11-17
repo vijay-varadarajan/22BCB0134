@@ -1,4 +1,4 @@
-n = int(input("Earthquakes count: "))
+n = int(input())
 low, med, high = 0, 0, 0
 
 if n < 0:
@@ -8,6 +8,7 @@ elif n == 0:
 else:
     for i in range(n):
         mag = float(input(f"Mag {i+1}: "))
+    
         if mag <= 5.4:
             low += 1
         elif 5.4 < mag <= 7.0:

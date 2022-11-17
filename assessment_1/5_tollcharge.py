@@ -1,5 +1,5 @@
-kmtr = float(input("Kilometres travelled: "))
-print("Charge: ", end='')
+kmtr = float(input())
+
 if kmtr <= 1000:
     print(0)
 elif 1000 < kmtr <= 10000:
@@ -10,7 +10,5 @@ elif 20000 < kmtr <= 40000:
     print(250)
 elif 40000 < kmtr <= 60000:
     print(350)
-elif kmtr > 60000:
-    print(500)
 else:
-    print("Invalid input")
+    print(500)

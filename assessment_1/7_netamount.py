@@ -11,8 +11,6 @@ elif code == 2:
 elif code == 3:
     if amount > 500:
         DISC = 0.1
-else:
-    print("Invalid code")
 
 amount -= amount * DISC
-print(f"Net amount: {amount:.2f}")
+print(f"{amount:.2f}")

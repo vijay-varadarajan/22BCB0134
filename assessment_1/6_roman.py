@@ -1,53 +1,49 @@
-dec = int(input("Enter an integer: "))
-roman = ""
+def main():
+    num = int(input("Enter a two digit integer: "))
 
-places = []
-for i in range(len(str(dec)),0,-1):
-    places.append((dec % (10**(i))) - (dec % (10**(i-1))))  
+    digits = []
+    for n in range(len(str(num)), 0, -1):
+        digits.append(num % (10**n) - num % (10**(n-1)))
 
-expanded = []
-for i in range(len(places)):
-    
-    if places[i] > 1000:
-        expanded.append(places[i])
-        continue
-    
-    if '4' in str(places[i]):
-        expanded.append((10**(len(places) - (i+1))))
-        expanded.append(5*(10**(len(places) - (i+1))))
-    elif '9' in str(places[i]):
-        expanded.append((10**(len(places) - (i+1))))
-        expanded.append(10*(10**(len(places) - (i+1))))
-    else:
-        expanded.append(places[i])
+    for n in range(len(digits) + str(num).count('4') + str(num).count('9')):
+        if '4' in str(digits[n]) or '9' in str(digits[n]):
+            digits.insert(n+1, digits[n] + 10**(len(str(digits[n])) - 1))
+            digits[n] = 10**(len(str(digits[n])) - 1)
 
-for num in expanded:
-    while num >= 1000:
-        roman += 'M'
-        num -= 1000
+    print(f"Roman numeral: {digtoroman(digits)}")
 
-    while num >= 500:
-        roman += 'D'
-        num -= 500
 
-    while num >= 100:
-        roman += 'C'
-        num -= 100
+def digtoroman(digits):
+    roman = ''
+    for digit in digits:
+        while digit >= 1000:
+            roman += 'M'
+            digit -= 1000
 
-    while num >= 50:
-        roman += 'L'
-        num -= 50
+        while digit >= 500:
+            roman += 'D'
+            digit -= 500
 
-    while num >= 10:
-        roman += 'X'
-        num -= 10
+        while digit >= 100:
+            roman += 'C'
+            digit -= 100
 
-    while num >= 5:
-        roman += 'V'
-        num -= 5
+        while digit >= 50:
+            roman += 'L'
+            digit -= 50
 
-    while num >= 1:
-        roman += 'I'
-        num -= 1
+        while digit >= 10:
+            roman += 'X'
+            digit -= 10
 
-print(roman)
+        while digit >= 5:
+            roman += 'V'
+            digit -= 5
+
+        while digit >= 1:
+            roman += 'I'
+            digit -= 1
+
+    return roman
+
+main()
