@@ -17,8 +17,10 @@ def main():
             digits.insert(n+1, digits[n] + 10**(len(str(digits[n])) - 1))
             digits[n] = 10**(len(str(digits[n])) - 1)
 
-    print(f"Roman numeral: {digtoroman(digits, roman)}")
+    print(f"\nRoman numeral: {digtoroman(digits, roman)}\n")
 
+    print("Press enter to exit")
+    inp = input()
 
 def digtoroman(digits, roman):
     
