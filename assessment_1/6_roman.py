@@ -1,5 +1,12 @@
 def main():
-    num = int(input("Enter a two digit integer: "))
+    num = int(input("Enter any integer: "))
+    roman = ''
+    
+    if num == 0:
+        roman += 'nulla'
+    elif num < 0:
+        roman += '- '
+    num = int(str(num).strip('-'))
 
     digits = []
     for n in range(len(str(num)), 0, -1):
@@ -10,11 +17,11 @@ def main():
             digits.insert(n+1, digits[n] + 10**(len(str(digits[n])) - 1))
             digits[n] = 10**(len(str(digits[n])) - 1)
 
-    print(f"Roman numeral: {digtoroman(digits)}")
+    print(f"Roman numeral: {digtoroman(digits, roman)}")
 
 
-def digtoroman(digits):
-    roman = ''
+def digtoroman(digits, roman):
+    
     for digit in digits:
         while digit >= 1000:
             roman += 'M'
