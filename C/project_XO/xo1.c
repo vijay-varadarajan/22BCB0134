@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include <getopt.h>
 #include <stdlib.h>
 
 #include "helpers.h"
@@ -37,13 +36,16 @@ int main()
         // Evaluate the matrix each time to check if pattern matches
         win = checker(game);
         if (win == 1){
+            printf("-------------------------------------------------------------------------------");
             break;
         }
     }
     if (win == 0){
+        printf("-------------------------------------------------------------------------------");
         printf("Game Drawn\n");
     }
-
+    printf("-------------------------------------------------------------------------------");
     dispgame(game);
+    printf("-------------------------------------------------------------------------------");
 }
 
