@@ -14,6 +14,6 @@ else:
         n += 2
     
     if sum % 10 == 0:
-        print(f"{dob}, Lucky number")
+        print(f"{dob},not Lucky number")
     else:
-        print(f"{dob}, Not a lucky number")
+        print(f"{dob}, lucky number")
