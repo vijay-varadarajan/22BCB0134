@@ -1,10 +1,14 @@
 import re
-
+# " "  ”
 string = input()
 corrected_string = []
 data = string.rstrip(']').lstrip('[').split(',')
+print(data)
 
 for datum in data:
+    print(datum)
+    datum = re.sub("\u201d", '"', datum)
+    datum = re.sub("\u201c", '"', datum)
     datum = datum.strip()
     if match := re.search(r"^\{(?:[\"]|[\'])(.*)(?:[\"]|[\']):([0-9]+)\}$", datum):
         name, age = match.group(1), match.group(2)
@@ -14,9 +18,7 @@ for datum in data:
         corrected_string.append({'name': name, 'age': int(age)})
     else:
         print("None")
-
 print(corrected_string)
-
 name_merge = False
 age_merge = False
 no_merge = False
@@ -35,9 +37,6 @@ for n in range(len(corrected_string)):
     if name_merge or age_merge or no_merge:
         break
 
-print(name_merge)
-print(age_merge)
-print(no_merge)
 final_string = []
 
 if name_merge:
@@ -78,10 +77,24 @@ elif age_merge:
 else:
     final_string = corrected_string
 
-final_string = str(final_string).replace(" ", "")
-if name_merge:
-    for c in final_string:
-        if c == ',':
-            final_string.insert(" ", index(c))
+output = '['
+for data in final_string:
+    output += '{'
+    output += f'"{data["name"]}":{data["age"]}'
+    output += '},'
+output += f'\b]'
 
-print(final_string)
+if name_merge:
+    output = re.sub(r",", r", ", output, count = 1)
+
+final_output = ''
+for i in range(len(output)):
+    if output[i] == '"' and not output[i+1].isalpha():
+        final_output += '\u201d'
+    elif output[i] == '"' and output[i+1].isalpha():
+        final_output += '\u201c'
+    else:
+        final_output += output[i]
+
+print(output)
+print(final_output)
