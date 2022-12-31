@@ -1,0 +1,9 @@
+customerId,Product,Quantity,rate,TotalPrice
+111,book,2,45.0,90.0
+
+111,pen,1,10.0,10.0
+
+222,bag,2,100.0,200.0
+
+,,,,TotalAmount: Rs:300.0
+
