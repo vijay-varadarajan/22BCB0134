@@ -59,6 +59,7 @@ def fn3():
         for row in reader:
             if row['quantity'] == max_orders:
                 customer_max.append(row['customerId'])
+    return customer_max
 
 if __name__ == "__main__":
     main()
