@@ -1,20 +1,22 @@
 import csv
 
-customers = int(input("Customers: "))
-net_total = 0
-with open("products.csv", 'w') as file:
-    writer = csv.DictWriter(file, fieldnames=['custid','prod','quantity','rate','total'])
-    for i in range(customers):
-        products = int(input("Products: "))
-        custid = int(input("Id: "))
-        for j in range(products):
-            prod = input("Product: ")
-            quantity = int(input("Quantity: "))
-            rate = float(input("Rate: "))
-            total = rate * quantity
-            net_total += total
-            writer.writerow({"custid":custid, "prod":prod, "quantity":quantity, "rate":rate, "total":total})
-    writer.writerow({"custid":f'TotalAmount: Rs:{net_total}'})
+def main():
+    customers = int(input("Customers: "))
+    net_total = 0
+    with open("products.csv", 'w') as file:
+        writer = csv.DictWriter(file, fieldnames=['custid','prod','quantity','rate','total'])
+        for i in range(customers):
+            products = int(input("Products: "))
+            custid = int(input("Id: "))
+            for j in range(products):
+                prod = input("Product: ")
+                quantity = int(input("Quantity: "))
+                rate = float(input("Rate: "))
+                total = rate * quantity
+                net_total += total
+                writer.writerow({"custid":custid, "prod":prod, "quantity":quantity, "rate":rate, "total":total})
+        writer.writerow({"custid":f'TotalAmount: Rs:{net_total}'})
+
 
 def fn1(id):
     cust_total = 0
@@ -24,6 +26,7 @@ def fn1(id):
             if row['customerId'] == id:
                 cust_total += int(row['TotalPrice'])
     return cust_total
+
 
 def fn2():
     max_order_count = 0
@@ -47,16 +50,15 @@ def fn2():
                 min_order.append(row['Product'])
     return max_order, min_order
 
+
 def fn3():
+    customer_max = []
+    max_orders, min_orders = fn2()
     with open('products.csv', 'r') as file:
         reader = csv.DictReader(file)
-        curr_id = 0
         for row in reader:
-            curr_id = row['customerId']
-            break
-        for row in reader:
-            order_count = 0
-            if row['customerId'] == curr_id:
-                order_count += int(row['Quantity'])
+            if row['quantity'] == max_orders:
+                customer_max.append(row['customerId'])
 
-
+if __name__ == "__main__":
+    main()
