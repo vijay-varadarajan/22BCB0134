@@ -17,17 +17,26 @@ def main():
     given_creds = []
     with open('credentials.txt', 'r') as file:
         lines = file.read()
-        creds = lines.replace('\n', ', ').split(', ')
-        given_creds = creds
+        creds = lines.split(',')
+        for cred in creds:
+            if '\n' in cred:
+                spl = cred.split('\n')
+            else:
+                spl = cred.strip()
+            if type(spl) == list:
+                for i in spl:
+                    given_creds.append(str(i).strip())
+            else:
+                given_creds.append(spl)
 
     check_user = False
     check_pass = False
     for i in range(0, len(given_creds), 2):
-        if i == username:
+        if given_creds[i] == username:
             check_user = True
             break
     for i in range(1, len(given_creds), 2):
-        if i == password:
+        if given_creds[i] == password:
             check_pass = True
             break
 
@@ -201,5 +210,5 @@ def calc_total_fare(booking_option, dest, details):
     return total_fare
 
 
-if __name__ == "__mani__":        
+if __name__ == "__main__":        
     main()

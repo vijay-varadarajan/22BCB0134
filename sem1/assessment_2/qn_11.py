@@ -8,11 +8,12 @@ def main():
             if count == int(str(perc - (perc % 10))[0]):
                 break
     else:
-        print(int(str(perc % 10)[0]))
         for i in range(500, 1000):
             if ramanujan(i):
                 room = i
-            if count == int(str(perc)[:len(str(perc))-1]):
+                count += 1
+                print(count)
+            if (len(str(count+2)) == 2 and len(str(perc)) == 2) or (len(str(count)) == 2 and len(str(perc)) == 3):
                 break
         if room == 0:
             for i in range(500, 1000):
@@ -32,8 +33,8 @@ def perfect(n):
         return False
 
 def ramanujan(n):
-    for i in range(1, n):
-        for j in range(1, n):
+    for i in range(1, n//5):
+        for j in range(1, n//5):
             if i**3 + j**3 == n:
                 return True
     return False

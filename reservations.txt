@@ -1,0 +1,10 @@
+Remaining seats:
+Regular = 9
+Tatkal = 3
+Passessnger Name - Age - Source - Destination - Seat No
+Arun - 39 - Bengaluru - Chennai - 15
+Sheetal - 34 - Bengaluru - Chennai - 14
+Karthik - 70 - Bengaluru - Chennai - 13
+Date of journey: 25-11-2022
+total fare = Rs. 2175.0
+

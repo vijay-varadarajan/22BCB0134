@@ -22,10 +22,11 @@ for i in range(len(opts)):
     scores[i] = score
 
 scores = dict(sorted(scores.items(), key=lambda item: item[1], reverse=True))
-
+print(scores)
 output = []
 printed_cands = []
 candidate_num = list(scores.keys())
+cand_scores = list(scores.values())
 for i in range(len(scores)):
     candidate_appended = False
     candidates = f'C{candidate_num[i]+1}'
@@ -39,9 +40,11 @@ for i in range(len(scores)):
         if scores[i] == scores[j]:
             candidates += f',C{candidate_num[j]+1}'
     printed_cands.append(candidates)
-    tot = '{total_score:.2f}'.format(total_score=scores[i])
+    tot = '{total_score:.2f}'.format(total_score=cand_scores[i])
     line = {'rank':i+1, 'Candidates':candidates, 'Total':str(tot)}
 
     output.append(line)
 
-print(tabulate(output, headers='keys', tablefmt="plain", disable_numparse=True))
+print(*list(output[0].keys()))
+for line in output:
+    print(*list(line.values()), sep='\t')

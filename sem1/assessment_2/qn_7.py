@@ -1,6 +1,6 @@
 import itertools as it
 
-string = input()
+string = input().strip().split(' ')
 lucky_num = int(input())
 str_len = int(input())
 
@@ -20,9 +20,8 @@ for comb in combs:
     summ = 0
     for letter in comb:
         summ += value[letter]
-    print(summ)
     if summ == lucky_num:
         lucky_combs.append(comb)
 
 for comb in lucky_combs:
-    print(*comb)
+    print(*comb, sep='')
