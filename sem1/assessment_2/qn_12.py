@@ -48,3 +48,4 @@ for i in range(len(scores)):
 print(*list(output[0].keys()))
 for line in output:
     print(*list(line.values()), sep='\t')
+    
