@@ -1,0 +1,1 @@
+print("Number of letters: ", len(input("Enter a string: ").replace(' ', '').strip()))
