@@ -1,0 +1,2 @@
+New input line 1New input line 2abcdefghiABCnEW LINE 
+ old line
