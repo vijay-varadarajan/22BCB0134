@@ -8,11 +8,7 @@ int main(void)
     int cp = a[n-1];
     for(int i = n-2; i >= 0; i--)
     {
-        if (a[i] < cp)
-        {
-            continue;
-        }
-        else
+        if (a[i] > cp)
         {
             printf("%d\n", a[i]);
             cp = a[i];
