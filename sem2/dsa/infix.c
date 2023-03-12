@@ -26,30 +26,79 @@ end of exp is reached:
 */
 
 #include <stdio.h>
+#include <string.h>
 #include <ctype.h>
-#define N 5
-
-int top = -1; char stack[N];
 
 void push(char stack[], int top, int N, char val);
+void pop(char stack[], int top);
+int precedence(char oper);
 
 int main(void)
 {
-    char exp[5] = "2*3+5";
-    for (int i = 0; i < 5; i++)
+    int top = -1, N = 11;
+    char stack[N], exp[11] = "2+5*3-2/7/8"; 
+
+    for (int i = 0; i < N; i++)
     {
         if(isdigit(exp[i]) != 0)
         {
-            printf("%d", exp[i]);
+            printf("%c", exp[i]);
         }
         else
         {
-            if(top == -1)
+            if (top == -1)
             {
-                push(stack[], top, N, exp[i])
+                top++;
+                push(stack, top, N, exp[i]);
             }
-
+            else
+            {
+                if (precedence(stack[top]) >= precedence(exp[i]))
+                {
+                    pop(stack, top);
+                    top--;
+                    top++;
+                    push(stack, top, N, exp[i]);
+                }
+                else
+                {
+                    top++;
+                    push(stack, top, N, exp[i]);
+                }
+            }
         }
+
+        //printf("%d\n", top);
+    }
+
+    while(top > -1)
+    {
+        pop(stack, top);
+        top--;
+    }
+}
+
+int precedence(char oper)
+{
+    switch (oper)
+    {
+    case '(':
+        return 0;
+
+    case '+':
+        return 1;
+    
+    case '-':
+        return 1;
+
+    case '*':
+        return 2;
+
+    case '/':
+        return 3;
+    
+    default:
+        break;
     }
 }
 
@@ -61,7 +110,18 @@ void push(char stack[], int top, int N, char val)
     }
     else
     {
-        top++;
         stack[top] = val;
+    }
+}
+
+void pop(char stack[], int top)
+{
+    if (top == -1)
+    {
+        return;
+    }
+    else
+    {
+        printf("%c", stack[top]);
     }
 }
