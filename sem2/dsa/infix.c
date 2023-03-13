@@ -26,6 +26,7 @@ end of exp is reached:
 */
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -36,10 +37,11 @@ int precedence(char oper);
 int main(void)
 {
     int top = -1, N = 11;
-    char stack[N], exp[11] = "2+5*3-2/7/8"; 
+    char stack[N], exp[11] = "2*5+3"; 
 
     for (int i = 0; i < N; i++)
     {
+
         if(isdigit(exp[i]) != 0)
         {
             printf("%c", exp[i]);
@@ -54,7 +56,7 @@ int main(void)
             else
             {
                 if (precedence(stack[top]) >= precedence(exp[i]))
-                {
+                {    
                     pop(stack, top);
                     top--;
                     top++;
