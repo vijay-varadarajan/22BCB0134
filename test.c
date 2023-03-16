@@ -1,54 +1,76 @@
 #include <stdio.h>
 
+int N = 5;
+int top = -1;
+int stack[5]; // declare stack array of size 5 
+
+void push(int n);
+void pop();
+int peek();
+void display();
+
 int main(void)
 {
-    int rows, cols;
-    scanf("%d %d", &rows, &cols);
+    int choice, value;
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
     
-    // Create a matrix with given rows and columns
-    int elems[rows][cols];
-
-    // Initialize variables to calculate the row sum, column sums and sum of row sums
-    int row_sum, col_sum[cols], sum_row_sum = 0;
-    
-    // Get all elements of the matrix as user input and initialize column sum array to 0s.
-    for(int i = 0; i < rows; i++)
+    switch(choice)
     {
-        for(int j = 0; j < cols; j++)
+        case 1:
+            printf("Enter value: ");
+            scanf("%d", value);
+            push(value);
+            break;
+        case 2:
+            pop();
+            break;
+        case 3:
+            display();
+            break;
+        default:
+            printf("Invalid choice.");
+    }
+}
+
+void push(int n)
+{
+    if (top >= N)
+        printf("Stack Overflow"); // if top is at N, stack is full, unable to push
+    else
+    {
+        top++; // otherwise increment top
+        stack[top] = n; // assign the input value (n) to the stack's topmost index
+        printf("Value pushed");
+    }
+}
+
+void pop()
+{
+    if (top <= -1)
+        printf("Nothing to pop"); // if top is less than 0 nothing to print
+    else
+        top--; // Otherwise decrement top by 1
+}
+
+int peek()
+{
+    if (top <= -1)
+        printf("Nothing to peek"); // if top is less than 0, no elements in the array
+    else
+        return stack[top]; // else return the value stored in the topmost index of stack
+}
+
+void display()
+{
+    if (top <= -1)
+        printf("No elements in stack to display."); // if top less than 0, no elements in the array
+    else
+    {
+        printf("Elements in stack: \n");
+        for(int i = top; i >= 0; i--) // otherwise, loop thro the stack and print each element
         {
-            scanf("%d", &elems[i][j]);
-            col_sum[j] = 0;
+            printf("%d ", stack[i]);
         }
     }
-
-    // Iterate through the 2 d array
-    for (int i = 0; i < rows; i++)
-    {
-        // Set row sum to zero for each row
-        row_sum = 0;
-        for (int j = 0; j < cols; j++)
-        {
-            // Print the elements of the matrix
-            printf("%d ", elems[i][j]);
-
-            // Add the current row element to the row sum
-            row_sum += elems[i][j];
-
-            // Add the current column element to the appropriate column in column sum
-            col_sum[j] += elems[i][j];
-        }
-        // Update sum of row sums with the current rowsum
-        sum_row_sum += row_sum;
-
-        // print the row sum
-        printf("%d\n", row_sum);
-    }
-
-    // In the final line print the column sums
-    for(int i = 0; i < cols; i++)
-    {
-        printf("%d ", col_sum[i]);
-    }
-    // Followed by the sum of row sums
-    printf("%d", sum_row_sum);
 }

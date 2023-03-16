@@ -1,58 +1,54 @@
 #include <stdio.h>
-#define N 5
 
 int main(void)
 {
-    // Create empty arrays
-    int int_array[5];
-    float float_array[5];
-    double double_array[5];
-    char char_array[5];
+    int rows, cols;
+    scanf("%d %d", &rows, &cols);
+    
+    // Create a matrix with given rows and columns
+    int elems[rows][cols];
 
-    // Get input values
-    printf("Enter 5 integer values: ");
-    for (int i = 0; i < N; i++)
+    // Initialize variables to calculate the row sum, column sums and sum of row sums
+    int row_sum, col_sum[cols], sum_row_sum = 0;
+    
+    // Get all elements of the matrix as user input and initialize column sum array to 0s.
+    for(int i = 0; i < rows; i++)
     {
-        scanf("%d", &int_array[i]);
-    }
-
-    printf("Enter 5 float values: ");
-    for (int i = 0; i < N; i++)
-    {
-        scanf("%f", &float_array[i]);
-    }
-
-    printf("Enter 5 double values: ");
-    for (int i = 0; i < N; i++)
-    {
-        scanf("%lf", &double_array[i]);
+        for(int j = 0; j < cols; j++)
+        {
+            scanf("%d", &elems[i][j]);
+            col_sum[j] = 0;
+        }
     }
 
-    printf("Enter 5 characters: ");
-    for (int i = 0; i < N; i++)
+    // Iterate through the 2 d array
+    for (int i = 0; i < rows; i++)
     {
-        scanf("%c", &char_array[i]);
+        // Set row sum to zero for each row
+        row_sum = 0;
+        for (int j = 0; j < cols; j++)
+        {
+            // Print the elements of the matrix
+            printf("%d ", elems[i][j]);
+
+            // Add the current row element to the row sum
+            row_sum += elems[i][j];
+
+            // Add the current column element to the appropriate column in column sum
+            col_sum[j] += elems[i][j];
+        }
+        // Update sum of row sums with the current rowsum
+        sum_row_sum += row_sum;
+
+        // print the row sum
+        printf("%d\n", row_sum);
     }
 
-    // Print given values
-    for(int i = 0; i < N; i++)
+    // In the final line print the column sums
+    for(int i = 0; i < cols; i++)
     {
-        printf("%d ", int_array[i]);
+        printf("%d ", col_sum[i]);
     }
-    printf("\n");
-    for(int i = 0; i < N; i++)
-    {
-        printf("%.2f ", float_array[i]);
-    }
-    printf("\n");
-    for(int i = 0; i < N; i++)
-    {
-        printf("%lf ", double_array[i]);
-    }
-    printf("\n");
-    for(int i = 0; i < N; i++)
-    {
-        printf("%c ", char_array[i]);
-    }
-    printf("\n");
+    // Followed by the sum of row sums
+    printf("%d", sum_row_sum);
 }
