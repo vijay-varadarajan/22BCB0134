@@ -59,7 +59,7 @@ int peek()
         printf("Nothing to peek"); // if top is less than 0, no elements in the array
     else
         return stack[top]; // else return the value stored in the topmost index of stack
-}
+}   
 
 void display()
 {
