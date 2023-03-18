@@ -17,7 +17,7 @@ int main(void)
     // get details of each employee using a loop and store it in the respective arrays
     for (int i = 0; i < n; i++) 
     {
-        printf("Enter details of employee %d:", i+1);
+        printf("Enter details of employee %d:\n", i+1);
         printf("Employee number: ");
         scanf("%d", &number[i]);
         printf("Employee name: ");
@@ -43,22 +43,18 @@ int main(void)
     for (int i = 1; i < n; i++)
     {
         // if multiple employees have highest salary, exit.
-        else if (strcmp(salary[i], salary[max]) == 0) 
+        if (strcmp(salary[i], salary[max]) == 0) 
         {
             printf("Cannot determine\n");
             return 1;
         }
-        
         if (salary[i] > salary[max])
-        {
             max = i;
-        }
     }
 
     // print the details of the employee with the maximum salary according to the given format
-    printf("Highest salary employee details: \n");
+    printf("\nHighest salary employee details: \n");
     printf("Emp.no  Name  Salary\n");
     printf("%d\t%s\t%s", number[max], name[max], salary[max]);
-
     return 0;
 }
