@@ -42,6 +42,7 @@ return stack[0] as int
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <time.h>
 #define N 50
 
 
@@ -63,7 +64,7 @@ int main(int argc, char* argv[])
     char* expr = "5-3+(6-2/2)*5";
 
     char* post = topost(expr, strlen(expr));
-    // printf("Postfix: %s\n", post);
+    // printf("%s", post);
 
     int ans = evalpost(post, strlen(post));
 

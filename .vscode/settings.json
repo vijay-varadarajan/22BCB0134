@@ -38,6 +38,7 @@
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
     "stdio.h": "c",
-    "float.h": "c"
+    "float.h": "c",
+    "time.h": "c"
   }
 }
