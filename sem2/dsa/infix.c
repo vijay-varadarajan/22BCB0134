@@ -1,5 +1,6 @@
 /*
 
+    INFIX TO POSTFIX
 infix exprression in char expr[]
 parse thro expr[] using i
     if expr[i] is a number:
@@ -22,43 +23,91 @@ parse thro expr[] using i
                 push oper1 above oper0
 end of expr is reached:
     keep popping and printing from stack
+
+    EVALUATE POSTFIX
+parse thro post[]
+    if post[i] is a digit
+        push to stack
+    else
+        temp_ans = perform operation on top two elements (as ints) of stack
+        pop twice
+        push temp_ans (as char) to stack
+return stack[0] as int
     
 */
+
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
 #define N 50
 
+
 int top = -1;
 char stack[N];
-char expr[N] = "1/2+(3-4)*5"; 
-char post[N];
+
 
 void push(char val);
 void pop();
 int peek();
 int precedence(char oper);
+int oper(int a, int b, char op);
+char* topost(char* expr, int n);
+int evalpost(char* post, int n);
 
-int main(void)
+
+int main(int argc, char* argv[])
 {
-    int j = 0;
-    for (int i = 0; i < N; i++)
+    char* expr = "5-3+(6-2/2)*5";
+
+    char* post = topost(expr, strlen(expr));
+    // printf("Postfix: %s\n", post);
+
+    int ans = evalpost(post, strlen(post));
+
+    printf("\nAns: %d\n", ans);
+
+    free(post);
+}
+
+
+int evalpost(char* post, int n)
+{
+    int sub = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (isdigit(post[i]) != 0)
+            push(post[i]);
+        else
+        {
+            sub = oper(stack[top - 1] - '0', stack[top] - '0', post[i]);
+            pop(); pop();
+            push(sub + '0');
+        }
+    }
+    return stack[0] - '0';
+}
+
+
+char* topost(char* expr, int n)
+{
+    int j = -1; 
+    char* post = malloc(n*sizeof(char));
+    for (int i = 0; i < n; i++)
     {
         if(isdigit(expr[i]) != 0)
-        {
-            printf("%c", expr[i]);
-        }
+            post[++j] = expr[i];
+        
         else if (expr[i] == '(')
-        {
             push(expr[i]);
-        }
+        
         else if (expr[i] == ')')
         {
             while (stack[top] != '(')
             {
-                printf("%c", peek());
+                post[++j] = peek();
                 pop();
             }
             pop();
@@ -66,31 +115,85 @@ int main(void)
         else
         {
             if (top == -1)
-            {
                 push(expr[i]);
-            }
+
             else
             {
                 if (precedence(stack[top]) >= precedence(expr[i]))
                 {    
-                    printf("%c", peek());
+                    post[++j] = peek();
                     pop();
                     push(expr[i]);
                 }
                 else
-                {
                     push(expr[i]);
-                }
             }
         }
     }
 
     while(top > -1)
     {
-        printf("%c", peek());
+        post[++j] = peek();
         pop();
     }
+    post[++j] = '\0';
+    return post;
 }
+
+
+void push(char val)
+{
+    if (top >= N-1)
+        return;
+    else
+    {
+        ++top;
+        stack[top] = val;
+    }
+}
+
+
+void pop()
+{
+    if (top <= -1)
+        return;
+    
+    else
+        --top;
+}
+
+
+int peek()
+{
+    if (top <= -1)
+        return -1;
+    
+    else
+        return stack[top];
+}
+
+
+int oper(int a, int b, char op)
+{
+    switch (op)
+    {
+        case '+':
+            return a + b;
+        
+        case '-':
+            return a - b;
+
+        case '*':
+            return a * b;
+
+        case '/':
+            return a / b;
+
+        default:
+            break;
+    }
+}
+
 
 int precedence(char oper)
 {
@@ -113,42 +216,5 @@ int precedence(char oper)
     
     default:
         break;
-    }
-}
-
-void push(char val)
-{
-    if (top >= N-1)
-    {
-        return;
-    }
-    else
-    {
-        ++top;
-        stack[top] = val;
-    }
-}
-
-void pop()
-{
-    if (top <= -1)
-    {
-        return;
-    }
-    else
-    {
-        --top;
-    }
-}
-
-int peek()
-{
-    if (top <= -1)
-    {
-        return -1;
-    }
-    else
-    {
-        return stack[top];
     }
 }
