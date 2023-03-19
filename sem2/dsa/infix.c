@@ -1,8 +1,8 @@
 /*
 
-infix expression in char exp[]
-parse thro exp[] using i
-    if exp[i] is a number:
+infix exprression in char expr[]
+parse thro expr[] using i
+    if expr[i] is a number:
         print
     elif ( :
         store in stack
@@ -20,7 +20,7 @@ parse thro exp[] using i
                 push oper1 in place of oper0
             else
                 push oper1 above oper0
-end of exp is reached:
+end of expr is reached:
     keep popping and printing from stack
     
 */
@@ -29,54 +29,66 @@ end of exp is reached:
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
+#define N 50
 
-void push(char stack[], int top, int N, char val);
-void pop(char stack[], int top);
+int top = -1;
+char stack[N];
+char expr[N] = "1/2+(3-4)*5"; 
+char post[N];
+
+void push(char val);
+void pop();
+int peek();
 int precedence(char oper);
 
 int main(void)
 {
-    int top = -1, N = 11;
-    char stack[N], exp[11] = "2*5+3"; 
-
+    int j = 0;
     for (int i = 0; i < N; i++)
     {
-
-        if(isdigit(exp[i]) != 0)
+        if(isdigit(expr[i]) != 0)
         {
-            printf("%c", exp[i]);
+            printf("%c", expr[i]);
+        }
+        else if (expr[i] == '(')
+        {
+            push(expr[i]);
+        }
+        else if (expr[i] == ')')
+        {
+            while (stack[top] != '(')
+            {
+                printf("%c", peek());
+                pop();
+            }
+            pop();
         }
         else
         {
             if (top == -1)
             {
-                top++;
-                push(stack, top, N, exp[i]);
+                push(expr[i]);
             }
             else
             {
-                if (precedence(stack[top]) >= precedence(exp[i]))
+                if (precedence(stack[top]) >= precedence(expr[i]))
                 {    
-                    pop(stack, top);
-                    top--;
-                    top++;
-                    push(stack, top, N, exp[i]);
+                    printf("%c", peek());
+                    pop();
+                    push(expr[i]);
                 }
                 else
                 {
-                    top++;
-                    push(stack, top, N, exp[i]);
+                    push(expr[i]);
                 }
             }
         }
-
-        //printf("%d\n", top);
     }
 
     while(top > -1)
     {
-        pop(stack, top);
-        top--;
+        printf("%c", peek());
+        pop();
     }
 }
 
@@ -104,26 +116,39 @@ int precedence(char oper)
     }
 }
 
-void push(char stack[], int top, int N, char val)
+void push(char val)
 {
-    if (top == N-1)
+    if (top >= N-1)
     {
         return;
     }
     else
     {
+        ++top;
         stack[top] = val;
     }
 }
 
-void pop(char stack[], int top)
+void pop()
 {
-    if (top == -1)
+    if (top <= -1)
     {
         return;
     }
     else
     {
-        printf("%c", stack[top]);
+        --top;
+    }
+}
+
+int peek()
+{
+    if (top <= -1)
+    {
+        return -1;
+    }
+    else
+    {
+        return stack[top];
     }
 }
