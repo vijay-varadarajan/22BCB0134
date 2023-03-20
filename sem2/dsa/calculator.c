@@ -61,7 +61,7 @@ int evalpost(char* post, int n);
 
 int main(int argc, char* argv[])
 {
-    char* expr = "5-3+(6-2/2)*5";
+    char* expr = "5/4+(6-2/2)*5";
 
     char* post = topost(expr, strlen(expr));
     // printf("%s", post);
