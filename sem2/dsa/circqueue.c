@@ -20,7 +20,7 @@ int main(void)
         {
             case 1:
                 printf("Enter number to enqueue: ");
-                scanf("%d", &num);
+                scanf("%d", &num);  
                 enqueue(num);
                 break;
             
@@ -40,11 +40,11 @@ int main(void)
 
 void disp()
 {
-    if (front == -1 && rear == -1)
+    if (rear == -1)
         printf("Nothing to display.\n");
     else
     {
-        for (int i = front; i != rear; i = (i+1)%N)
+        for (int i = front; i != rear; i = (i+1) % N)
             printf("%d ", queue[i]);
         printf("%d \n", queue[rear]);
     }
@@ -56,12 +56,9 @@ void enqueue(int num)
         printf("Queue overflow");
     else
     {
-        if (front == -1 && rear == -1)
+        if (front == -1)
             front++;
-        if (rear == N-1 || rear == -1)
-            rear = 0;
-        else
-            rear = (rear + 1) % N;
+        rear = (rear + 1) % N;
         queue[rear] = num;
     }
 }
