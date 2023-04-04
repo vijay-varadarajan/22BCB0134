@@ -73,7 +73,6 @@ void dequeue()
         {   
             front = -1; rear = -1;
         }    
-        else
-            front = (front + 1) % N;
+        front = (front + 1) % N;
     }
 }
