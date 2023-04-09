@@ -9,33 +9,35 @@ int queue_peek();
 void pop();
 int stack_peek();
 
-const int N = 4;    // N = number of customers = number of pastas
-int top = 0, front = 0, rear = N - 1;
+const int N = 6;    // N = number of customers = number of pastas
+int top = 0;    // first element of pasta stack is the topmost
+int front = 0, rear = N - 1;    // initialize front and rear of queue
 
 // customer queue and pasta stack initialized 
-int customers[] = {0,0,1,1}, pastas[] = {0,1,0,1};
+int customers[] = {1,1,1,0,0,0,0,1,0,1}, pastas[] = {1,0,1,0,1,1,0,1,0,1};
+
 
 int main(void)
 {
-    int no = N, front_customer; // 'no' keeps track of number of customers left
+    int left = N, front_customer; // 'left' keeps track of number of customers left
     int rotation_count = 0;     // initializing a variable to count the number of customer rotations
 
     // repeat until number of elements in customers reaches 0
-    while(no > 0)
+    while(left > 0)
     {
         // if customer preference matches pasta stack
         if (stack_peek() == queue_peek())
         {
             dequeue();          // remove customer from queue
             pop();              // remove pasta from stack
-            no--;                   // decrement customer count by 1
+            left--;                   // decrement customer count by 1
             rotation_count = 0;     // reset rotation count to 0
         }
 
         // if customer preference does not match pasta stack
         else
         {
-            if (no == 1) // exit loop if only one customer is left
+            if (left == 1) // exit loop if only one customer is left
                 break;
 
             front_customer = queue_peek();      
@@ -45,13 +47,14 @@ int main(void)
         }
 
         // exit if the all customers in the queue have been checked against pasta stack
-        if (rotation_count == no)       
+        if (rotation_count == left)       
             break;                      
     }
 
     // print number of customers left unserved
-    printf("\nCustomers unserved: %d\n", no);
+    printf("\nCustomers unserved: %d\n", left);
 }
+
 
 void enqueue(int num)
 {
@@ -86,18 +89,6 @@ int queue_peek()
         printf("Empty queue"); // if front is -1, no elements in queue
     else
         return customers[front];    // otherwise return element in front index 
-}
-
-void push(int n)
-{
-    if (top <= 0)
-        printf("Stack Overflow"); // if top is at N, pastas is full, unable to push
-    else
-    {
-        top--; // otherwise increment top
-        pastas[top] = n; // assign the input value (n) to the pastas's topmost index
-        printf("Value pushed");
-    }
 }
 
 void pop()
