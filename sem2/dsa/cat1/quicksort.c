@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-void quicksort(int a[], int length);
-void quicksort_recursion(int a[], int low, int high);
+void quicksort(int a[], int low, int high);
 int partition(int a[], int low, int high);
 void swap(int *x, int *y);
 void printArray(int A[], int n);
@@ -13,7 +12,7 @@ int main(void)
     int a[] = {1,4,5,2,7,6,3,4,9};
     int length = 9;
 
-    quicksort(a, length);
+    quicksort(a, 0, length-1);
     printArray(a, length);
 }
 
@@ -34,44 +33,33 @@ void swap(int *x, int *y)
     *y = temp;
 }
 
-void quicksort(int a[], int length)
-{
-    srand(time(NULL));
-    quicksort_recursion(a, 0, length - 1);
-}
-
-void quicksort_recursion(int a[], int low, int high)
+void quicksort(int a[], int low, int high)
 {
     if (low < high)
     {
         int pivot_index = partition(a, low, high);
-        quicksort_recursion(a, low, pivot_index - 1);
-        quicksort_recursion(a, pivot_index + 1, high);
+        quicksort(a, low, pivot_index - 1);
+        quicksort(a, pivot_index + 1, high);
     }
 }
 
+
 int partition(int a[], int low, int high)
 {
-    int pivot_index = low + (rand() % (high - low));
+    int pivot_item = a[low];
+    int left = low, right = high;
 
-    if (pivot_index != high)
-    {
-        swap(&a[pivot_index], &a[high]);
+    while (left < right){
+        while (a[left] <= pivot_item && left != high)
+            left++;
+        while (a[right] > pivot_item)
+            right--;
+        if (left < right)
+            swap(&a[left], &a[right]);
     }
 
-    int pivot_value = a[high];
+    a[low] = a[right];
+    a[right] = pivot_item;
 
-    int i = low;
-
-    for (int j = low; j < high; j++)
-    {
-        if (a[j] <= pivot_value)
-        {
-            swap(&a[i], &a[j]);
-            i++;
-        }
-
-    }
-    swap(&a[i], &a[high]);
-    return i;
+    return right;
 }

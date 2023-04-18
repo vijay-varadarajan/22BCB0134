@@ -14,18 +14,11 @@ void mergesort(int nums[], int l, int r);
 void printArray(int A[], int n);
 void merge(int nums[], int l, int mid, int r);
 
-void sort(int *nums, int numsSize)
-{
-    int l = 0;
-    int r = numsSize - 1;
-    mergesort(nums, l, r);
-}
-
 int main(void)
 {
     int nums[] = {1,1,4,2,1,3};
     int n = sizeof(nums) / sizeof(nums[0]);
-    sort(nums, n);
+    mergesort(nums, 0, n - 1);
     printArray(nums, n);
 }
 
@@ -41,7 +34,7 @@ void mergesort(int nums[], int l, int r)
 {
     if (l < r)
     {
-        int mid = l + (r - l)/2;
+        int mid = (l + r)/2;
         mergesort(nums, l, mid);
         mergesort(nums, mid+1, r);
         merge(nums, l, mid, r);
@@ -50,39 +43,32 @@ void mergesort(int nums[], int l, int r)
 
 void merge(int nums[], int l, int mid, int r)
 {
-    int n1 = mid - l + 1;
-    int n2 = r - mid;
-    int L[n1], R[n2];
-
-    for(int i = 0; i < n1; i++)
-        L[i] = nums[l + i];
-    for(int j = 0; j < n2; j++)
-        R[j] = nums[mid + j + 1];
-
-    int i = 0; int j = 0; int k = l;
-
-    while (i < n1 && j < n2)
+    int tmp[r + 1];
+    int i, j, k;
+    i = l; j = mid + 1; k = l;
+    while (i <= mid && j <= r)
     {
-        if (L[i] >= R[j])
-        {
-            nums[k] = L[i];
-            i++;
+        if (nums[i] < nums[j]){
+            tmp[k] = nums[i];
+            i++; k++;
         }
-        else
-        {
-            nums[k] = R[j];
-            j++;
+        else{
+            tmp[k] = nums[j];
+            j++; k++;
         }
+    }
+
+    for (; i <= mid; i++)
+    {
+        tmp[k] = nums[i];
         k++;
     }
-    while (i < n1)
+    for (; j <= r; j++)
     {
-        nums[k] = L[i];
-        i++; k++;
+        tmp[k] = nums[j];
+        k++;
     }
-    while (j < n2)
-    {
-        nums[k] = R[j];
-        j++; k++;
-    }
+
+    for(int i = l; i <= r; i++)
+        nums[i] = tmp[i];
 }

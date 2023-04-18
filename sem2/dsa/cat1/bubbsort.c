@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+void swap(int *a, int *b);
+
 /*
 Repeat n-1 times
 For i from 0 to n–2
@@ -18,17 +20,21 @@ int main(void)
         {
             if(nums[j] > nums[j+1])
             {
-                int tmp = nums[j];
-                nums[j] = nums[j+1];
-                nums[j+1] = tmp;
+                swap(&nums[j], &nums[j+1]);
             }
         }
     }
 
     for(int i = 0; i < n; i++)
     {
-        printf("%d", nums[i]);
+        printf("%d ", nums[i]);
     }
     printf("\n");
 }
 
+void swap(int *a, int *b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}

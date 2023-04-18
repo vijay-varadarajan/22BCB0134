@@ -10,9 +10,9 @@ void swap(int *a, int *b) {
 }
 
 void selectionSort(int array[], int n) {
-  for (int i = 0; i < n - 1; i++) {
-    int k = i;
-    for (int j = i + 1; j < n; j++) {
+  int i, j, k;
+  for (i = 0; i < n - 1; i++) {
+    for (j = i, k = i; j < n; j++) {
 
       // To sort in descending order, change > to < in this line.
       // Select the minimum element in each loop.
@@ -36,8 +36,8 @@ void printArray(int array[], int n) {
 // driver code
 int main() {
   int data[] = {3,5,2,4,1}; int n = 5;
-  printArray(data, n);
+  
   selectionSort(data, n);
-  printf("Sorted array in Acsending Order:\n");
+  
   printArray(data, n);
 }
