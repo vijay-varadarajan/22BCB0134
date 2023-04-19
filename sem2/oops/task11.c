@@ -14,7 +14,7 @@ int main(void)
 
     // Copy str to str2 using strcpy
     char str2[20];
-    strcpy(str2, str);
+    strncpy(str2, str, 5);
     printf("\nOriginal string, str: %s\nCopied string, str2: %s\n", str, str2);
 
     // Concatenate str to the end of newstr using strcat
