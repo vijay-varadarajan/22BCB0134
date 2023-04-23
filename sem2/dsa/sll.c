@@ -12,8 +12,8 @@ void insert_end(sllnode* head, int value);
 int find(sllnode* head, int value);
 void delete_mid(sllnode* head, int value);
 void print(sllnode* head);
-void destroy(sllnode* head);
 void delete_end(sllnode* head);
+sllnode* destroy(sllnode* head);
 sllnode* delete_front(sllnode* head);
 sllnode* insert_sorted(sllnode* head, int value);
 sllnode* insert_front(sllnode* head, int value);
@@ -79,13 +79,12 @@ int main(void)
     print(head);
     printf("\n");
 
-    printf("%p\n", head);
-    destroy(head);
+    head = destroy(head);
     //    
-    printf("%p\n", head);
-    exit(1);
-    print(head);
-    printf("\n");
+    if (head)
+        print(head);
+    else
+        printf("NULL");
 }
 
 sllnode* create (int value)
@@ -235,14 +234,16 @@ void print(sllnode* head)
     }
 }
 
-void destroy(sllnode* head)
+sllnode* destroy(sllnode* head)
 {
     sllnode* temp = head;
     if (temp == NULL)
     {
-        return;
+        return head;
     }
-    destroy(temp -> next);
+    head = destroy(temp -> next);
     free(temp);
-    head = temp;
+    head = NULL;
+
+    return head;
 }
