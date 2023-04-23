@@ -18,7 +18,7 @@ void countsort(int a[], int n)
 {
     int max = findmax(a, n);
     
-    int *count = malloc((max + 1)*sizeof(int));
+    int *count = (int *) malloc((max + 1)*sizeof(int));
     int i = 0, j = 0;
     
     for (i = 0; i <= max; i++)
