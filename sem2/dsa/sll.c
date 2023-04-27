@@ -105,8 +105,6 @@ sllnode* insert_front(sllnode* head, int value)
         exit(1);
 
     new -> value = value;
-    new -> next = NULL;
-
     new -> next = head;
     head = new;
 
