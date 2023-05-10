@@ -18,6 +18,7 @@ sllnode* delete_front(sllnode* head);
 sllnode* insert_sorted(sllnode* head, int value);
 sllnode* insert_front(sllnode* head, int value);
 sllnode* create (int value);
+sllnode* reverse(sllnode* head);
 
 int main(void)
 {
@@ -74,17 +75,27 @@ int main(void)
     print(head);
     printf("\n");
 
-    delete_mid(head, 1);
     // -3 0 2 4 6
-    print(head);
     printf("\n");
 
-    head = destroy(head);
-    //    
-    if (head)
-        print(head);
-    else
-        printf("NULL");
+    head = reverse(head);
+
+    print(head);
+}
+
+sllnode* reverse(sllnode* head){
+    sllnode* left = NULL; sllnode* right = NULL;
+    sllnode* curr = head;
+
+    while(curr != NULL){
+        right = curr -> next;
+        curr -> next = left;
+        left = curr;
+        curr = right;
+    }
+
+    head = left;
+    return head;
 }
 
 sllnode* create (int value)
