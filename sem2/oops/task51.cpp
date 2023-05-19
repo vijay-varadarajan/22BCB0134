@@ -2,41 +2,44 @@
 
 using namespace std;
 
-class MenuItem{             // parent class
-    public: 
-        string name;        // public parent class variables
-        float calories; 
-        
-        void print(){       // print method defined in parent class
-            cout << name <<  " (" << calories << " cal)" << endl;
-        }
-};
-
-class Beverage: public MenuItem{    // Beverage class - child of MenuItem class
+class Vehicle{
     public:
-        float ounces;               // child class variables
+        float weight;
+        float length, breadth, height;
 
-        float cal_per_ounce()       // child class method
-        {
-            return calories / ounces;
+        Vehicle(float weight, float length, float breadth, float height){
+            this -> weight = weight;
+            this -> length = length;
+            this -> breadth = breadth;
+            this -> height = height;
+        }
+
+        void printvehicleInfo(){
+            cout << "Vehicle's weight: " << this->weight << endl;
+            cout << "Dimensions: " << this->length << "x" << this->breadth << "x" << this -> height << endl;
         }
 };
 
-int main(void)
-{
-    MenuItem Noodles;               // object of parent class
-    Noodles.name = "Egg Chow Mein"; 
-    Noodles.calories = 300;
+class Car: public Vehicle {
+    public: 
+        string model;
 
-    Noodles.print();
+        Car(string model, float weight, float length, float breadth, float height):Vehicle(weight, length, breadth, height){
+            this->model = model;
+            this->weight = weight;
+            this->length = length;
+            this->breadth = breadth;
+            this->height = height;
+        }
 
-    Beverage Soda;                  // object of child class 
-    Soda.name = "Pepsi";            // Soda has access to variables name and calories in MenuItem class
-    Soda.calories = 100;            
-    Soda.ounces = 10;
+        void printInfo(){
+            cout << "Model: " << this->model << endl;
+        }
+};
 
-    Soda.print();                   // It also has access to print method along with cal_per_ounce method
-    cout << "Calories per ounce: " << Soda.cal_per_ounce() << endl;
-
+int main(void){
+    Car car1("Audi", 200.35, 3.5, 1.57, 1.25);
+    car1.printvehicleInfo();
+    car1.printInfo();
     return 0;
 }
