@@ -37,8 +37,10 @@
   "C_Cpp_Runner.useAddressSanitizer": false,
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
+    "*.html": "django-html",
     "stdio.h": "c",
     "float.h": "c",
-    "time.h": "c"
+    "time.h": "c",
+    "iostream": "cpp"
   }
 }
