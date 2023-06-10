@@ -1,53 +1,44 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-void countsort(int a[], int n);
-int findmax(int a[], int n);
+int main(void){
+    int n;              		// number of nodes in binary tree
+    int array[100];     	// input array form of binary tree
+    int heights[100];   	// stores heights of each node in the tree
 
-int main(void)
-{
-    int a[] = {2,1,5,3,4,4,12,3,7,9,8,8,2,8,1}, n = 15;
+    // if two nodes of a tree are directly linked then they must be present in consecutive heights (one odd and one even).
+    // So, the nodes present in even heights are not directly linked so are the nodes present in odd heights
+    // keeping track of the sum of money in nodes of even heights and odd heights separately
     
-    countsort(a, n);
-    for (int i = 0; i < n; i++)
-        printf("%d ", a[i]);
-}
+    int sumodds = 0, sumevens = 0;  
 
+    printf("Enter maximum number of nodes in binary tree (array size): ");
+    scanf("%d", &n);
 
-void countsort(int a[], int n)
-{
-    int max = findmax(a, n);
-    
-    int *count = (int *) malloc((max + 1)*sizeof(int));
-    int i = 0, j = 0;
-    
-    for (i = 0; i <= max; i++)
-        count[i] = 0;
-    
-    for (i = 0; i < n; i++)
-        count[a[i]]++;
-
-    i = 0;
-    while (j <= max){
-        if (count[j] > 0){
-            a[i] = j;
-            i++; count[j]--;
-        }
-        else{
-            j++;
-        }
-    }
-}
-
-
-int findmax(int a[], int n)
-{
-    int max = a[0];
-    for (int i = 1; i < n; i++)
-    {
-        if (a[i] > max)
-            max = a[i];
+    // get user input array
+    printf("Enter elements heightwise (root to leaf) from left to right\n");
+    for(int i = 0; i < n; i++){
+        printf("Enter element %d: ", i+1); scanf("%d", &array[i]);
     }
 
-    return max;
+
+    // generate an array containing the heights of each node of the tree (i.e [0,1,1,2,2,2,2,...])
+    
+    heights[0] = 0;
+    for(int i = 1; i < n; i++){
+        if (i % 2 == 0)
+            heights[i] = heights[(i/2) - 1] + 1;
+        else
+            heights[i] = heights[(i/2)] + 1;
+    }
+
+    // calculate the sum of nodes in even heights and odd heights, store them separately    
+    for (int i = 0; i < n; i++){
+        if (heights[i] % 2 == 0)
+            sumevens += array[i];
+        else
+            sumodds += array[i];
+    }
+
+    // output the maximum of the calculated sum values
+    printf("Maximum amount of money the thief can rob: %d", sumodds > sumevens ? sumodds : sumevens);
 }

@@ -8,6 +8,7 @@ int adj_matrix[MAX][MAX];
 int nodes, start;
 
 void DFS(int vertex);
+void DFSiter(int vertex);
 
 int main()
 {
@@ -51,3 +52,4 @@ void DFS(int vertex)
         }
     }
 }
+
