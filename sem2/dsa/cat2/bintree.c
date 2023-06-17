@@ -19,6 +19,7 @@ BSTreeNode* search(BSTreeNode* root, int value);
 void preorder(BSTreeNode* root);
 void inorder(BSTreeNode* root);
 void postorder(BSTreeNode* root);
+void levelOrder(BSTreeNode* root);
 
 
 int main(void)
@@ -38,8 +39,46 @@ int main(void)
     inorder(root);
     printf("\n");
     preorder(root);
-    printf("\n");
+    printf("\nPostorder: ");
     postorder(root);
+    printf("\n");
+    levelOrder(root);
+}
+
+int front = -1, rear = -1;
+
+void push(BSTreeNode* queue[], BSTreeNode* root){
+    if (rear > 9){
+        printf("Queue overflow");
+        return;
+    }
+    if (front == -1)
+        front++;
+    queue[++rear] = root;
+}
+
+BSTreeNode* front_node(BSTreeNode* queue[]){
+    return queue[front];
+}
+
+void pop(BSTreeNode* queue[]){
+    front++;
+}
+
+void levelOrder(BSTreeNode* root){
+    BSTreeNode* queue[10]; BSTreeNode* temp;
+    push(queue, root);
+    while(front != rear){
+        temp = front_node(queue);
+        pop(queue);
+        printf("%d ", temp->value);
+        if (temp -> lchild != NULL){
+            push(queue, temp->lchild);
+        } 
+        if (temp -> rchild != NULL){
+            push(queue, temp->rchild);
+        }
+    }
 }
 
 
