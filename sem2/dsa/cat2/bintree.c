@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct BSTreeNode{
     struct BSTreeNode* lchild;
@@ -31,17 +32,8 @@ int main(void)
     inorder(root);
     printf("\n");
     preorder(root);
-
-    printf("\n%d \n", search(root, 4) -> value);
-
-    root = deletemid(root, 6);
-
-    inorder(root);
     printf("\n");
-    preorder(root);
-    printf("\nPostorder: ");
-    postorder(root);
-    printf("\n");
+
     levelOrder(root);
 }
 
@@ -65,10 +57,16 @@ void pop(BSTreeNode* queue[]){
     front++;
 }
 
+bool isempty(BSTreeNode* queue[]){
+    if (rear == -1 || (front > rear))
+        return true;
+    return false;
+}
+
 void levelOrder(BSTreeNode* root){
     BSTreeNode* queue[10]; BSTreeNode* temp;
     push(queue, root);
-    while(front != rear){
+    while(!isempty(queue)){
         temp = front_node(queue);
         pop(queue);
         printf("%d ", temp->value);
