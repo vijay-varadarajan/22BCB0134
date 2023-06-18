@@ -2,30 +2,30 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct BSTreeNode{
-    struct BSTreeNode* lchild;
+typedef struct BSTNode{
+    struct BSTNode* lchild;
     int value;
-    struct BSTreeNode* rchild;
-} BSTreeNode;
+    struct BSTNode* rchild;
+} BSTNode;
 
 
-BSTreeNode* create(BSTreeNode* root, int value);
-BSTreeNode* createfromarray(int values[], int start, int n);
-BSTreeNode* createfromsortedarray(int values[], int start, int n);
-BSTreeNode* createfromrandomarray(int values[], int start, int n);
-BSTreeNode* insert(BSTreeNode* root, int value);
-BSTreeNode* deleteroot(BSTreeNode* root);
-BSTreeNode* deletemid(BSTreeNode* root, int value);
-BSTreeNode* search(BSTreeNode* root, int value);
-void preorder(BSTreeNode* root);
-void inorder(BSTreeNode* root);
-void postorder(BSTreeNode* root);
-void levelOrder(BSTreeNode* root);
+BSTNode* create(BSTNode* root, int value);
+BSTNode* createfromarray(int values[], int start, int n);
+BSTNode* createfromsortedarray(int values[], int start, int n);
+BSTNode* createfromrandomarray(int values[], int start, int n);
+BSTNode* insert(BSTNode* root, int value);
+BSTNode* deleteroot(BSTNode* root);
+BSTNode* deletemid(BSTNode* root, int value);
+BSTNode* search(BSTNode* root, int value);
+void preorder(BSTNode* root);
+void inorder(BSTNode* root);
+void postorder(BSTNode* root);
+void levelOrder(BSTNode* root);
 
 
 int main(void)
 {
-    BSTreeNode* root = NULL;
+    BSTNode* root = NULL;
     int array[] = {5,2,3,6,3,4,1,8,7,9};
     
     root = createfromrandomarray(array, 0, 10);
@@ -39,7 +39,7 @@ int main(void)
 
 int front = -1, rear = -1;
 
-void push(BSTreeNode* queue[], BSTreeNode* root){
+void push(BSTNode* queue[], BSTNode* root){
     if (rear > 9){
         printf("Queue overflow");
         return;
@@ -49,22 +49,22 @@ void push(BSTreeNode* queue[], BSTreeNode* root){
     queue[++rear] = root;
 }
 
-BSTreeNode* front_node(BSTreeNode* queue[]){
+BSTNode* front_node(BSTNode* queue[]){
     return queue[front];
 }
 
-void pop(BSTreeNode* queue[]){
+void pop(BSTNode* queue[]){
     front++;
 }
 
-bool isempty(BSTreeNode* queue[]){
+bool isempty(BSTNode* queue[]){
     if (rear == -1 || (front > rear))
         return true;
     return false;
 }
 
-void levelOrder(BSTreeNode* root){
-    BSTreeNode* queue[10]; BSTreeNode* temp;
+void levelOrder(BSTNode* root){
+    BSTNode* queue[10]; BSTNode* temp;
     push(queue, root);
     while(!isempty(queue)){
         temp = front_node(queue);
@@ -80,8 +80,8 @@ void levelOrder(BSTreeNode* root){
 }
 
 
-BSTreeNode* create(BSTreeNode* root, int value){
-    root = (BSTreeNode*) malloc(sizeof(BSTreeNode));
+BSTNode* create(BSTNode* root, int value){
+    root = (BSTNode*) malloc(sizeof(BSTNode));
     root -> value = value;
     root -> lchild = NULL;
     root -> rchild = NULL;
@@ -91,12 +91,12 @@ BSTreeNode* create(BSTreeNode* root, int value){
 
 
 // Creating a binary search tree from given sorted array
-BSTreeNode* createfromsortedarray(int* values, int start, int n){
+BSTNode* createfromsortedarray(int* values, int start, int n){
     if (start > n)
         return NULL;
 
     int mid = (start + n)/2;
-    BSTreeNode* root = (BSTreeNode*) malloc(sizeof(BSTreeNode));
+    BSTNode* root = (BSTNode*) malloc(sizeof(BSTNode));
     root -> value = values[mid];
     root -> lchild = createfromsortedarray(values, start, mid - 1);
     root -> rchild = createfromsortedarray(values, mid + 1, n);
@@ -106,8 +106,8 @@ BSTreeNode* createfromsortedarray(int* values, int start, int n){
 
 
 //Creating a binary search tree from a random array
-BSTreeNode* createfromrandomarray(int* values, int start, int n){
-    BSTreeNode* root = NULL;
+BSTNode* createfromrandomarray(int* values, int start, int n){
+    BSTNode* root = NULL;
     for (int i = start; i < n; i++){
         root = insert(root, values[i]);
     }
@@ -117,11 +117,11 @@ BSTreeNode* createfromrandomarray(int* values, int start, int n){
 
 
 // Creating a normal binary tree from given array
-BSTreeNode* createfromarray(int* values, int start, int n){
+BSTNode* createfromarray(int* values, int start, int n){
     if (start >= n)
         return NULL;
 
-    BSTreeNode* root = (BSTreeNode*) malloc(sizeof(BSTreeNode));
+    BSTNode* root = (BSTNode*) malloc(sizeof(BSTNode));
     root -> value = values[start];
     
     root -> lchild = createfromarray(values, 2*start + 1, n);
@@ -132,9 +132,9 @@ BSTreeNode* createfromarray(int* values, int start, int n){
 
 
 // Inserting into a binary search tree
-BSTreeNode* insert(BSTreeNode* root, int value){
+BSTNode* insert(BSTNode* root, int value){
     if (root == NULL) {
-        BSTreeNode* root = (BSTreeNode*) malloc(sizeof(BSTreeNode));
+        BSTNode* root = (BSTNode*) malloc(sizeof(BSTNode));
         root -> value = value;
         root -> lchild = NULL;
         root -> rchild = NULL;
@@ -152,7 +152,7 @@ BSTreeNode* insert(BSTreeNode* root, int value){
 
 
 // traversals - recursive
-void inorder(BSTreeNode* root){
+void inorder(BSTNode* root){
     if (root == NULL)
         return;
     
@@ -162,7 +162,7 @@ void inorder(BSTreeNode* root){
 }
 
 
-void preorder(BSTreeNode* root){
+void preorder(BSTNode* root){
     if (root != NULL){
         printf("%d ", root->value);
         preorder(root->lchild);
@@ -171,7 +171,7 @@ void preorder(BSTreeNode* root){
 }
 
 
-void postorder(BSTreeNode* root){
+void postorder(BSTNode* root){
     if (root != NULL){
         postorder(root->lchild);
         postorder(root->rchild);
@@ -181,7 +181,7 @@ void postorder(BSTreeNode* root){
 
 
 // searching a BST for an element
-BSTreeNode* search(BSTreeNode* root, int value)
+BSTNode* search(BSTNode* root, int value)
 {
     if (root == NULL){
         printf("Element not present in tree");
@@ -197,25 +197,25 @@ BSTreeNode* search(BSTreeNode* root, int value)
 }
 
 
-BSTreeNode* deleteroot(BSTreeNode *root){
+BSTNode* deleteroot(BSTNode *root){
     if (root -> lchild == NULL && root -> rchild == NULL){
         free(root);
         root = NULL;
     }
 
     else if (root -> lchild == NULL){
-        BSTreeNode* temp = root;
+        BSTNode* temp = root;
         root = root -> rchild;
         free(temp);
     }
     else if (root -> rchild == NULL){
-        BSTreeNode* temp = root;
+        BSTNode* temp = root;
         root = root -> lchild;
         free(temp);
     }
 
     else {
-        BSTreeNode* nextroot = root -> lchild;
+        BSTNode* nextroot = root -> lchild;
         while (nextroot -> rchild != NULL){
             nextroot = nextroot -> rchild;
         }
@@ -227,7 +227,7 @@ BSTreeNode* deleteroot(BSTreeNode *root){
 }
 
 
-BSTreeNode* deletemid(BSTreeNode* root, int value) {
+BSTNode* deletemid(BSTNode* root, int value) {
     if (root == NULL) {
         return NULL;
     }
@@ -240,17 +240,17 @@ BSTreeNode* deletemid(BSTreeNode* root, int value) {
             free(root);
             return NULL;
         } else if (root->lchild == NULL) {
-            BSTreeNode* temp = root;
+            BSTNode* temp = root;
             root = root->rchild;
             free(temp);
             return root;
         } else if (root->rchild == NULL) {
-            BSTreeNode* temp = root;
+            BSTNode* temp = root;
             root = root->lchild;
             free(temp);
             return root;
         } else {
-            BSTreeNode* successor = root->lchild;
+            BSTNode* successor = root->lchild;
             while (successor->rchild != NULL) {
                 successor = successor->rchild;
             }
