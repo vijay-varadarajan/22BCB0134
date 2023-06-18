@@ -45,11 +45,18 @@ void kruskalMST(int graph[][V]) {
     int edgeCount = 0; // Counter for the edges included in the result
 
     // Step 1: Sort all the edges in non-decreasing order of weights
-    struct Edge edges[E] = {
-        {0, 1, 4}, {0, 2, 2}, {1, 2, 3}, {1, 3, 1},
-        {1, 4, 6}, {2, 3, 5}, {2, 4, 7}, {3, 4, 8},
-        {4, 5, 9}
-    };
+    struct Edge edges[V * (V - 1) / 2];
+    int index = 0;
+    for (int i = 0; i < V; i++) {
+        for (int j = i + 1; j < V; j++) {
+            if (graph[i][j] != 0) {
+                edges[index].src = i;
+                edges[index].dest = j;
+                edges[index].weight = graph[i][j];
+                index++;
+            }
+        }
+    }
 
     qsort(edges, E, sizeof(struct Edge), compareEdges);
 

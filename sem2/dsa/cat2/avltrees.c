@@ -60,7 +60,7 @@ Node* balance(Node* node, int key){
             // LL rotation
             return rightRotate(node);
         } else {
-            // RL rotation
+            // LR rotation
             node -> left = leftRotate(node -> left);
             return rightRotate(node);
         }
@@ -70,7 +70,7 @@ Node* balance(Node* node, int key){
             // RR rotation
             return leftRotate(node);
         } else {
-            // LR rotation
+            // RL rotation
             node -> right = rightRotate(node -> right);
             return leftRotate(node);
         }
@@ -103,8 +103,8 @@ Node* insert(Node* node, int key){
 }
 
 Node* findMin(Node* node){
-    if (node == NULL){
-        return NULL;
+    if (node -> left == NULL && node -> right == NULL){
+        return node;
     } else {
         return findMin(node -> left);
     }
@@ -167,7 +167,7 @@ int main(void){
 
     inorder(root);
 
-    root = delete(root, 12);
+    root = delete(root, 8);
 
     inorder(root);
 
