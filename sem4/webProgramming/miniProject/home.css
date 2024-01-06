@@ -14,6 +14,26 @@ body {
     color: white;
 }
 
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: white;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #000000;
+}
+
+::selection {
+    background-color: rgb(239, 239, 239);
+    color: black;
+}
+
+
 #landing {
     display: flex;
     justify-content: center;
@@ -35,6 +55,8 @@ body {
 
     min-height: 60vh;
     width: 60%;
+
+    z-index: 2;
 }
 
 #hero-text {
@@ -53,6 +75,12 @@ body {
     margin: 10px 0px 10px 0px;
 }
 
+/* make above element unselectable */
+#hero-text h1::selection {
+    background-color: transparent;  
+    color: white;
+}
+
 #hero-text h2 {
     color: rgba(217, 217, 217, 0.888);
     font-family: 'Rubik Doodle Shadow', cursive;
@@ -69,10 +97,10 @@ body {
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    margin: 20px 0px 50px 0px;
+    margin: 30px 0px 50px 0px;
     padding-left: 5%;
     padding-right: 5%;
-    z-index: 1;
+    z-index: 2;
 }
 
 #get-started-div a{
