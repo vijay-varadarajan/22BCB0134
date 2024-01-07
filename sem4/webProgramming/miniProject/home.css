@@ -12,6 +12,8 @@ body {
     background-blend-mode:darken;
 
     color: white;
+
+    overflow-x: hidden;
 }
 
 
@@ -42,6 +44,7 @@ body {
 
     position: relative;
     min-height: 100vh;
+
 }
 
 #hero-pic {
@@ -52,11 +55,8 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-
-    min-height: 60vh;
+    
     width: 60%;
-
-    z-index: 2;
 }
 
 #hero-text {
@@ -72,7 +72,7 @@ body {
 #hero-text h1 {
     font-family: 'Foldit', cursive;
     font-size: 5rem;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 5px 0px;
 }
 
 /* make above element unselectable */
@@ -85,7 +85,7 @@ body {
     color: rgba(217, 217, 217, 0.888);
     font-family: 'Rubik Doodle Shadow', cursive;
     font-size: 2rem;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 5px 0px;
 }
 
 #hero-text p {
@@ -97,10 +97,10 @@ body {
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    margin: 30px 0px 50px 0px;
+    margin: 15px 0px 50px 0px;
     padding-left: 5%;
     padding-right: 5%;
-    z-index: 2;
+    z-index: 1;
 }
 
 #get-started-div a{
@@ -151,8 +151,208 @@ body {
 .particles-js-canvas-el {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 0;
     top: 0;
     left: 0;
 }
+
+@media screen and (max-width: 768px) {
+    #landing {
+        flex-direction: column;
+    }
+
+    #hero-pic {
+        width: 100%;
+    }
+
+    #hero {
+        width: 100%;
+    }
+
+    #hero-text {
+        margin: 0px 5% 0px 5%;
+    }
+
+    #hero-text h1 {
+        font-size: 4.2rem;
+    }
+
+    #hero-text h2 {
+        font-size: 1.8rem;
+    }
+
+    #hero-text p {
+        font-size: 1rem;
+    }
+
+    #get-started-div {
+        flex-direction: column;
+    }
+
+    #get-started-btn-div {
+        margin: 10px 0px;
+    }
+    
+}
+
+@media screen and (max-width: 500px) {
+    #landing {
+        flex-direction: column;
+    }
+
+    #hero-pic {
+        width: 100%;
+    }
+
+    #hero {
+        width: 100%;
+    }
+
+    #hero-text {
+        margin: 0px 5% 0px 5%;
+    }
+
+    #hero-text h1 {
+        font-size: 5rem;
+    }
+
+    #hero-text h2 {
+        font-size: 1.5rem;
+    }
+
+    #hero-text p {
+        font-size: 1rem;
+    }
+
+    #get-started-div {
+        flex-direction: column;
+    }
+
+    #get-started-btn-div {
+        margin: 10px 0px;
+    }
+    
+}
+
+#schedule {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px 0px 50px 0px;
+    width: 100%;
+    min-height: 100vh;
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#schedule h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2rem;
+    margin: 10px 0px 5px 0px;
+    text-align: center;
+}
+
+#schedule-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px 0px 50px 0px;
+    width: 100%;
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#schedule-table {
+    /* table style */
+    border-collapse: collapse;
+    border-radius: 20px;
+    width: 80%;
+    margin: 50px 0px 50px 0px;
+    
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+    
+    /* table header style */
+    background-color: none;
+}
+
+table, th, td {
+    border: 1px solid white;
+    padding: 15px;
+}
+
+#schedule-table tr td:hover {
+    background-color: rgba(255, 255, 255, 0.103);
+}
+
+#schedule-table td button {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-family: "Rubik Doodle Shadow", cursive;
+    cursor: pointer;
+}
+
+#button-td {
+    background-color: #00000000;
+    padding: 0px!important;
+}
+
+#button-td:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    animation: gradientAnimation 0.15s forwards;
+}
+
+#button-td:hover button {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-weight: 900;
+    animation: gradientAnimation 0.15s forwards;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background: black;
+    }
+    10% {
+        background: linear-gradient(to right, white, black 20%);
+    }
+    20% {
+        background: linear-gradient(to right, white, black 30%);
+    }
+    30% {
+        background: linear-gradient(to right, white, black 40%);
+    }
+    40% {
+        background: linear-gradient(to right, white, black 50%);
+    }
+    50% {
+        background: linear-gradient(to right, white, black 60%);
+    }
+    60% {
+        background: linear-gradient(to left, white 60%, black);
+    }
+    70% {
+        background: linear-gradient(to left, white 50%, black);
+    }
+    80% {
+        background: linear-gradient(to left, white 40%, black);
+    }
+    90% {
+        background: linear-gradient(to left, white 30%, black);
+    }
+    100% {
+        background: linear-gradient(to left, white 20%, black);
+    }
+}
+
