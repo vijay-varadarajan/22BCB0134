@@ -1,6 +1,10 @@
 /* import google fonts api */
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Foldit&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     /* background-image: url("images/background7.jpg"); */
     background-repeat: no-repeat;
@@ -34,7 +38,6 @@ body {
     background-color: rgb(239, 239, 239);
     color: black;
 }
-
 
 #landing {
     display: flex;
@@ -88,14 +91,14 @@ body {
     margin: 10px 0px 5px 0px;
 }
 
-#hero-text p {
+#hero-text #intro-para {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.1rem;
 }
 
 #get-started-div {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
     margin: 15px 0px 50px 0px;
     padding-left: 5%;
@@ -103,27 +106,32 @@ body {
     z-index: 1;
 }
 
-#get-started-div a{
-    text-decoration: none;
-    width: 100%;
+#get-started-div-part-a {
+    width: 30%;
 }
 
-#get-started-btn-div {
+#get-started-div-part-b {
+    width: 70%;
+}
+
+
+.get-started-btn-div {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     border: 2px solid white;
     border-radius: 10px;
     padding: 10px 15px;
-    margin: 0px 10px;
+    margin: 0px 0px;
 }
 
-#get-started-btn-div p{
+.get-started-btn-div p{
     font-family: 'Rubik Doodle Shadow', cursive;
     margin: 0px 0px;
 }
 
-#get-started-btn-div:hover {
+.get-started-btn-div:hover {
     transition: 0.2s;
     background-color: white;
     color: black;
@@ -133,13 +141,12 @@ body {
     border-radius: 10px;
 }
 
-#get-started-btn-div:hover p{
+.get-started-btn-div:hover p{
     color: black;
     font-weight:900;
 }
 
-#get-started-btn {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+.get-started-btn {
     font-size: 1.1rem;
     color: white;
     text-decoration: none;
@@ -155,84 +162,6 @@ body {
     z-index: 0;
     top: 0;
     left: 0;
-}
-
-@media screen and (max-width: 768px) {
-    #landing {
-        flex-direction: column;
-    }
-
-    #hero-pic {
-        width: 100%;
-    }
-
-    #hero {
-        width: 100%;
-    }
-
-    #hero-text {
-        margin: 0px 5% 0px 5%;
-    }
-
-    #hero-text h1 {
-        font-size: 4.2rem;
-    }
-
-    #hero-text h2 {
-        font-size: 1.8rem;
-    }
-
-    #hero-text p {
-        font-size: 1rem;
-    }
-
-    #get-started-div {
-        flex-direction: column;
-    }
-
-    #get-started-btn-div {
-        margin: 10px 0px;
-    }
-    
-}
-
-@media screen and (max-width: 500px) {
-    #landing {
-        flex-direction: column;
-    }
-
-    #hero-pic {
-        width: 100%;
-    }
-
-    #hero {
-        width: 100%;
-    }
-
-    #hero-text {
-        margin: 0px 5% 0px 5%;
-    }
-
-    #hero-text h1 {
-        font-size: 5rem;
-    }
-
-    #hero-text h2 {
-        font-size: 1.5rem;
-    }
-
-    #hero-text p {
-        font-size: 1rem;
-    }
-
-    #get-started-div {
-        flex-direction: column;
-    }
-
-    #get-started-btn-div {
-        margin: 10px 0px;
-    }
-    
 }
 
 #schedule {
@@ -261,7 +190,7 @@ body {
     flex-direction: column;
     margin: 50px 0px 50px 0px;
     width: 100%;
-
+    
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -356,3 +285,129 @@ table, th, td {
     }
 }
 
+@media screen and (max-width: 768px) {
+    #landing {
+        flex-direction: column;
+    }
+
+    #hero-pic {
+        width: 100%;
+    }
+
+    #hero {
+        width: 100%;
+    }
+
+    #hero-text {
+        margin: 0px 5% 0px 5%;
+    }
+
+    #hero-text h1 {
+        font-size: 4.2rem;
+    }
+
+    #hero-text h2 {
+        font-size: 1.8rem;
+    }
+
+    #hero-text #intro-para {
+        font-size: 0.9rem;
+    }
+
+    #get-started-div {
+        flex-direction: row;
+    }
+
+    .get-started-btn-div {
+        margin: 10px 0px;
+    }
+        
+    #get-started-div-part-a {
+        width: 22%;
+    }
+
+    #get-started-div-part-b {
+        width: 78%;
+    }
+
+    #schedule h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #landing {
+        flex-direction: column;
+    }
+    
+    #hero-pic {
+        width: 100%;
+    }
+    
+    #hero {
+        width: 100%;
+    }
+    
+    #hero-text {
+        margin: 0px 5% 0px 5%;
+    }
+    
+    #hero-text h1 {
+        font-size: 4rem;
+    }
+    
+    #hero-text h2 {
+        font-size: 1.5rem;
+    }
+    
+    #hero-text #intro-para {
+        font-size: 0.95rem;
+    }
+    
+    #get-started-div {
+        flex-direction: row;
+    }
+    
+    #get-started-btn-div {
+        margin: 10px 0px;
+    }
+    
+    #schedule h1 {
+        font-size: 1.4rem;
+    }
+}
+
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 7px;
+    font-size: 1rem;
+    font-family: "Rubik Doodle Shadow", cursive;
+    cursor: pointer;
+
+    border: 2px solid white;
+
+    display: none;
+
+    z-index: 1;
+}
+
+.scroll-to-top-btn a {
+    color: rgba(255, 255, 255, 0.923);
+}
+
+.scroll-to-top-btn:hover {
+    background-color: rgba(255, 255, 255, 0.923);
+    color: black;
+    cursor: pointer;
+}
+
+.scroll-to-top-btn:hover a {
+    color: black;
+    cursor: pointer;
+}
