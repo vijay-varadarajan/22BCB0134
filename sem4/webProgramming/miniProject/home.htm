@@ -12,8 +12,20 @@
     
 <body>
 
+<header>
+    <nav id="navbar">
+        <div id="nav-links-div">
+            <ul id="nav-links">
+                <li><a href="#" class="nav-link">Home</a></li>
+                <li><a href="#schedule" class="nav-link">Schedule</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
 <div class="scroll-to-top-btn">
-    <a href="#landing">
+    <a href="#">
         <i class="fas fa-arrow-up"></i>
     </a>
 </div>
@@ -29,22 +41,26 @@
         <div class="" id="hero-text">
             <h1>STARVIEW</h1>
             <h2>Welcome, Adventurer!</h2>
-            <p id="intro-para">Welcome to STARVIEW, your gateway to the cosmos. Embark on a journey of discovery and explore the vast expanse of the solar system from the comfort of your home. From the fiery surface of the Sun to the icy realms of the outer planets, the solar system is a place of wonder and beauty, full of mysteries waiting to be unraveled.</p>
+            <h3 id="intro-para">Welcome to STARVIEW, your gateway to the cosmos. </h3>
+                
+            <p id="intro-para">Embark on a journey of discovery and explore the vast expanse of the solar system from the comfort of your home.</p>
             
-            <p id="intro-para">Whether you're a seasoned astronomer or a curious beginner, STARVIEW offers a wealth of resources to fuel your exploration. Dive into detailed planet profiles, view stunning images from space missions, track the movements of celestial bodies in real-time, and even participate in community discussions with fellow space enthusiasts.</p>
+            <p id="intro-para">Dive into detailed planet profiles, view stunning images from space missions and take assessments with fellow space enthusiasts.</p>
+
+            <p class="wide-only" id="intro-para">From the fiery surface of the Sun to the icy realms of the outer planets, the solar system is a place of wonder and beauty, full of mysteries waiting to be unraveled.</p>
             
-            <p id="intro-para">So why wait? The universe is at your fingertips. Click the 'Get Started' button and begin your cosmic journey with STARVIEW today!</p>
+            <p id="intro-para">So why wait? The universe is at your fingertips!</p>
             
             <div id="get-started-div">
                 <div id="get-started-div-part-a">
                     <a href="#schedule" id="get-started-btn-link">
-                        <button class="get-started-btn">
+                        <button class="get-started-btn" id="schedule-btn">
                             <div class="get-started-btn-div" id="schedule-btn-div"> <p id="schedule-btn-div-text">Schedule</p> </div>
                         </button>
                     </a>
                 </div>
                 <div id="get-started-div-part-b">
-                    <a href="register.html" id="schedule-btn-link">
+                    <a href="#" id="schedule-btn-link">
                         <button class="get-started-btn">
                             <div class="get-started-btn-div" id="get-started-btn-div"> <p>Get &nbsp;Started</p> </div>
                         </button>
@@ -99,7 +115,54 @@
     </div>
 </section>
 
-</div>
+<section id="about">
+    <div id="about-header">
+        <h1>Company profile</h1>
+    </div>
+    <div id="about-name">
+        <h2>STARVIEW</h2>
+    </div>
+    <div id="about-company">
+        <div id="about-company-text">
+            <p>Starview is a leading space exploration company dedicated to bringing the wonders of the universe closer to people. With a team of passionate astronomers, engineers, and scientists, we strive to provide a unique and immersive experience for space enthusiasts of all ages.</p>
+            <p>Our mission is to inspire curiosity, foster scientific literacy, and promote a deeper understanding of the cosmos. Through our interactive website, educational resources, and community engagement, we aim to ignite a sense of wonder and encourage lifelong learning about the mysteries of the universe.</p>
+            <p>Join us on this cosmic journey as we explore the wonders of the solar system and beyond. Together, let's reach for the stars!</p>
+        </div>
+        <div id="about-company-links">
+            <a href="#" id="schedule-btn-link">
+                <button class="get-started-btn">
+                    <div class="get-started-btn-div" id="get-started-btn-div"> <p><i class="fas fa-envelope"></i></p> </div>
+                </button>
+            </a>
+            <a href="#" id="schedule-btn-link">
+                <button class="get-started-btn">
+                    <div class="get-started-btn-div" id="get-started-btn-div"> <p><i class="fab fa-github"></i></p> </div>
+                </button>
+            </a>
+            <a href="#" id="schedule-btn-link">
+                <button class="get-started-btn">
+                    <div class="get-started-btn-div" id="get-started-btn-div"> <p><i class="fab fa-linkedin"></i></p> </div>
+                </button>
+            </a>
+            <a href="#" id="schedule-btn-link">
+                <button class="get-started-btn">
+                    <div class="get-started-btn-div" id="get-started-btn-div"> <p><i class="fab fa-facebook"></i></p> </div>
+                </button>
+            </a>
+            <a href="#" id="schedule-btn-link">
+                <button class="get-started-btn">
+                    <div class="get-started-btn-div" id="get-started-btn-div"> <p><i class="fab fa-twitter"></i></p> </div>
+                </button>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div id="footer-div">
+        <p>© 2021 STARVIEW. All rights reserved.</p>
+    </div>
+</footer>
     
 <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="particles.js"></script>
