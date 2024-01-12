@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    /* background-image: url("images/background7.jpg"); */
+    background-image: url("images/background7.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -17,6 +17,7 @@ body {
     color: white;
 
     overflow-x: hidden;
+
 }
 
 
@@ -51,11 +52,11 @@ a {
     position: fixed;
     top: 0;
     left: 0;
-    width: 98%;
+    width: 100%;
     padding: 10px 20px 20px 10px;
     margin: 0px 0px 0px 0px;
     z-index: 1;
-
+    
     transition: 0.2s ease;
 }
 
@@ -64,6 +65,8 @@ a {
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    
+    margin: 0px 20px;
 }
 
 #navbar #logo-div a {
@@ -103,5 +106,185 @@ a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 90vh;
+    margin-top: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#form-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0px 0px 20px 0px;
+}
+
+.form-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 99%;
+
+    padding: 5px 5px;
+    margin: 0px 10px 0px 10px;
+    background-color: rgba(0, 0, 0, 0.582);
+    
+}
+
+.form-col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.364);
+    
+    padding: 20px 20px;
+    margin: 0px 10px;
+}
+
+.form-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    width: 90%;
+
+    padding: 5px 10px;
+    margin: 0px 0px;
+}
+
+input[type=checkbox], input[type=radio]{
+    width: 10px;
+    height: 20px;
+    margin: 10px 5px;
+}
+
+.form-row #interests, .form-row #payment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    width: 100%;
+    
+    padding: 5px 0px;
+    margin: 0px 0px;
+}
+
+.form-row #interests label, .form-row #payment label {
+    margin-right: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 6px 5px;
+    margin: 0px 0px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.582);
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(219, 219, 219);
+    font-size: 1rem;
+}
+
+input:hover, select:hover, textarea:hover {
+    background-color: rgba(27, 27, 27, 0.582);
+}
+
+option {
+    background-color: rgba(0, 0, 0, 0.964);
+}
+
+textarea {
+    resize: none;
+    height: 81px;
+}
+
+.form-row.submit-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+
+    padding: 5px 10px;
+    margin: 0px 0px;
+}
+
+button[type=submit] {
+    width: 70%;
+    height: 43px;
+    padding: 6px 5px;
+    margin: 23px 0px 0px 0px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.582);
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(219, 219, 219);
+    font-family: 'Rubik Doodle Shadow', cursive;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button[type=submit]:hover {
+    background-color: rgba(255, 255, 255, 0.771);
+    color: black;
+    font-weight: 600;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+@media screen and (max-width: 1150px) {
+    
+}
+
+
+@media screen and (max-width: 768px) {
+    #navbar {
+        padding: 10px 10px 10px 10px;
+    }
+
+    #nav-links-div ul li a {
+        font-size: 0.8rem;
+    }
+
+    .form-container {
+        flex-direction: column;
+    }
+
+    .form-col {
+        margin: 10px 0px;
+    }
+
+    .form-row {
+    }
+
+    .form-row #interests, .form-row #payment {
+        flex-direction: column;
+    }
+
+    .form-row #interests label, .form-row #payment label {
+        margin-right: 0px;
+    }
+
+    .form-row.submit-form {
+        flex-direction: column;
+    }
+
+    button[type=submit] {
+        width: 100%;
+    }
 }
