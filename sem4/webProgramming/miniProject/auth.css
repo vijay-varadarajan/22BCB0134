@@ -118,6 +118,8 @@ a {
     flex-direction: column;
     width: 100%;
     margin: 0px 0px 20px 0px;
+
+    text-align: center;
 }
 
 .form-container {
@@ -126,12 +128,24 @@ a {
     justify-content: center;
     flex-direction: row;
     flex-wrap: nowrap;
-    width: 99%;
 
     padding: 5px 5px;
-    margin: 0px 10px 0px 10px;
     background-color: rgba(0, 0, 0, 0.582);
     
+}
+
+.form-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.form-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 
 .form-col {
@@ -143,6 +157,7 @@ a {
     width: 100%;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.364);
+    box-shadow: 0px 0px 10px 0px rgba(190, 190, 190, 0.582);
     
     padding: 20px 20px;
     margin: 0px 10px;
@@ -163,7 +178,7 @@ a {
 input[type=checkbox], input[type=radio]{
     width: 10px;
     height: 20px;
-    margin: 10px 5px;
+    margin: 0px 5px;
 }
 
 .form-row #interests, .form-row #payment {
@@ -186,7 +201,7 @@ input[type=checkbox], input[type=radio]{
 input, select, textarea {
     width: 100%;
     padding: 6px 5px;
-    margin: 0px 0px;
+    margin: 0px -5px;
     border-radius: 6px;
     border: none;
     outline: none;
@@ -243,16 +258,58 @@ button[type=submit]:hover {
     font-weight: 600;
 }
 
+#register-btn {
+    width: 50%;
+    margin-left: 4px;
+    align-self: flex-start;
+}
+
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
 }
 
-@media screen and (max-width: 1150px) {
-    
+@media screen and (max-width: 1183px) {
+    .form-container {
+        flex-direction: column;
+    }
+
+    .form-top {
+        width: 100%;
+    }
+
+    .form-bottom {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .form-bottom input{
+        width: 105%;
+    }
+
+    .form-bottom #interests, .form-bottom #payment {
+        justify-content: flex-start;
+    }
+
+    .form-bottom input[type=radio], .form-bottom input[type=checkbox] {
+        width: 10px;
+        height: 20px;
+        margin: 10px 5px 10px 25px;
+    }
+
+    .form-row.submit-form {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    button[type=submit] {
+        width:30%;        
+        cursor: pointer;
+        margin-right: 30px;
+    }
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     #navbar {
         padding: 10px 10px 10px 10px;
     }
@@ -261,19 +318,49 @@ button[type=submit]:hover {
         font-size: 0.8rem;
     }
 
+    #form-header {
+        margin: 40px 0px 0px 0px;
+    }
+
     .form-container {
         flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.582);
+        border-radius: 20px;
+        box-shadow: 0px 0px 10px 0px rgba(190, 190, 190, 0.582);
     }
 
     .form-col {
-        margin: 10px 0px;
+        border: none;
+        box-shadow: none;
+        align-items: center;
+        justify-content: center;
     }
 
     .form-row {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .form-top {
+        flex-direction: column;
+    }
+    
+    .form-bottom{
+        margin-top: 0px;
+        margin-left: -10px;
+        flex-direction: column;
+    }
+
+    .form-top input, .form-bottom input, select, textarea{
+        width: 50%;
+    }
+
+    .form-bottom input[type=radio], .form-bottom input[type=checkbox] {
+        margin: 10px 5px 10px 15px;
     }
 
     .form-row #interests, .form-row #payment {
-        flex-direction: column;
+        justify-content: flex-end;
     }
 
     .form-row #interests label, .form-row #payment label {
@@ -282,9 +369,68 @@ button[type=submit]:hover {
 
     .form-row.submit-form {
         flex-direction: column;
+        align-items: flex-end;
     }
 
     button[type=submit] {
-        width: 100%;
+        width:90%;        
+        cursor: pointer;
+        margin-right: 30px;
+    }
+
+    #register-btn {
+        margin-left: 18px;
+    }
+
+}
+
+@media screen and (max-width: 430px){
+    .form-row {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    .form-top input, .form-bottom input, select, textarea {
+        width: 98%;
+    }
+    
+    .form-bottom #interests, .form-bottom #payment {
+        justify-content: flex-start;
+    }   
+    
+    .form-bottom input[type=radio], .form-bottom input[type=checkbox] {
+        padding-top: 0px;
+        margin: 10px 5px 10px 15px;
+    }
+
+    #register-btn {
+        margin-left: 9px;
     }
 }
+
+@media screen and (max-width: 375px) {
+    .form-bottom #interests, .form-bottom #payment {
+        flex-direction: row;
+        gap: 5px;
+    } 
+    .form-bottom input[type=radio], .form-bottom input[type=checkbox] {
+        padding-top: 0px;
+        margin: 0px 2px 0px 0px;
+    }
+    .form-row.submit-form {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    button[type=submit] {
+        width:50%;        
+        cursor: pointer;
+        margin: 0px;
+    }
+
+    #register-btn {
+        margin-top: 20px;
+        margin-left: 9px;
+    }
+}
+

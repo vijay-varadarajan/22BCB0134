@@ -34,25 +34,26 @@
 </header>
 
 <div id="register-form-div">
-    <table>
-        <tr>
-            <td>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="password">Password:</label>
-                <input type="password" id="email" name="email">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="SUBMIT">
-            </td>
-        </tr>
-    </table>
+    <div id="form-header">
+        <h1>Login</h1>
+    </div>
+    <form action="/">
+        <div class="form-container">
+            <div class="form-top">
+                <div class="form-col">
+                    <div class="form-row">
+                        <label for="username">Username: </label>
+                        <input type="text" id="username" name="username">
+                    </div>
+                    <div class="form-row">
+                        <label for="password">Password: </label>
+                        <input type="password" id="password" name="password">
+                    </div>
+                    <button type="submit" id="register-btn">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>  
 
 </body>
