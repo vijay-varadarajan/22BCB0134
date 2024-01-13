@@ -201,7 +201,7 @@ input[type=checkbox], input[type=radio]{
 input, select, textarea {
     width: 100%;
     padding: 6px 5px;
-    margin: 0px -5px;
+    margin: 0px -3px;
     border-radius: 6px;
     border: none;
     outline: none;
@@ -211,17 +211,25 @@ input, select, textarea {
     font-size: 1rem;
 }
 
+input {
+    height: 26px;
+}
+
+select {
+    height: 35px;
+}
+
+textarea {
+    resize: none;
+    height: 90px;
+}
+
 input:hover, select:hover, textarea:hover {
     background-color: rgba(27, 27, 27, 0.582);
 }
 
 option {
     background-color: rgba(0, 0, 0, 0.964);
-}
-
-textarea {
-    resize: none;
-    height: 81px;
 }
 
 .form-row.submit-form {
@@ -239,7 +247,7 @@ button[type=submit] {
     width: 70%;
     height: 43px;
     padding: 6px 5px;
-    margin: 23px 0px 0px 0px;
+    margin: 20px 0px 0px 0px;
     border-radius: 10px;
     border: none;
     outline: none;
