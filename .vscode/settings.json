@@ -38,12 +38,14 @@
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
     "*.html": "html",
+    "*.rmd": "markdown",
     "stdio.h": "c",
     "float.h": "c",
     "time.h": "c",
     "iostream": "cpp",
     "stdlib.h": "c",
-    "cstdlib": "c"
+    "cstdlib": "c",
+    "string.h": "c"
   },
   "C_Cpp.default.compilerPath": "c:\\msys64\\ucrt64\\bin\\gcc.exe"
 }
