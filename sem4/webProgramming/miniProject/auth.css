@@ -266,6 +266,13 @@ button[type=submit]:hover {
     font-weight: 600;
 }
 
+#forgot-pwd {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
 #register-btn {
     width: 50%;
     margin-left: 4px;
@@ -411,8 +418,8 @@ button[type=submit]:hover {
         margin: 10px 5px 10px 15px;
     }
 
-    #register-btn {
-        margin-left: 9px;
+    button[type=submit] {
+        width: 80%;
     }
 }
 
