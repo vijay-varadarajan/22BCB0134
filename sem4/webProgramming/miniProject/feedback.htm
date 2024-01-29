@@ -9,10 +9,11 @@
 
     <title>Starview - Register</title>
     <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="feedback.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 
-<body>
+<body id="Feedbackcontent">
     
 <header>
     <nav id="navbar">
@@ -32,3 +33,31 @@
         </div>
     </nav>
 </header>
+
+    <div class="feedback-container">
+        <h1>Feedback Form</h1>
+        <form id="feedbackForm">
+            <div class="rating">
+                <label for="starRating">Rate your experience:</label>
+                <div class="stars" id="starRating">
+                    <input type="radio" name="rating" id="star5" value="5"><label for="star5"></label>
+                    <input type="radio" name="rating" id="star4" value="4"><label for="star4"></label>
+                    <input type="radio" name="rating" id="star3" value="3"><label for="star3"></label>
+                    <input type="radio" name="rating" id="star2" value="2"><label for="star2"></label>
+                    <input type="radio" name="rating" id="star1" value="1"><label for="star1"></label>
+                </div>
+            </div>
+
+            <div class="comment">
+                <label for="userComment">Comments:</label>
+                <textarea id="userComment" name="userComment" rows="4" placeholder="Your feedback..."></textarea>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

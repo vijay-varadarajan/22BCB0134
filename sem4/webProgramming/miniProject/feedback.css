@@ -1,0 +1,61 @@
+/* feedback page */
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+} 
+
+.feedback-container {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h1 {
+    font-size: 38px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.rating {
+    margin-bottom: 20px;
+}
+
+label {
+    margin-bottom: 8px;
+    display: block;
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    cursor: pointer;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('images/Star.png');
+    background-size: cover;
+}
+
+.comment textarea {
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button[type="submit"] {
+    width: 30%;
+    margin: 20px 0px;
+    align-self: flex-start;
+}
