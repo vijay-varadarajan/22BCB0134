@@ -47,5 +47,6 @@
     "cstdlib": "c",
     "string.h": "c"
   },
-  "C_Cpp.default.compilerPath": "c:\\msys64\\ucrt64\\bin\\gcc.exe"
+  "C_Cpp.default.compilerPath": "c:\\msys64\\ucrt64\\bin\\gcc.exe",
+  "cmake.configureOnOpen": false
 }
