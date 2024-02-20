@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-/*
 int max2(int a, int b){
     return a > b ? a : b;
 }
@@ -42,7 +41,7 @@ int maxSubarraySum (int arr[], int l, int h){
 }
 
 int main(void){
-    int arr[] = {2, 3, 4, 5, 7};
+    int arr[] = {-2, 3, 4, 5, 7};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     int max_sum = maxSubarraySum(arr, 0, n-1);
@@ -50,31 +49,31 @@ int main(void){
     printf("Maximum contiguous sum is %d\n", max_sum);
     return 0;
 }
-*/
 
-// kadane's algorithm
 
-int kadanes(int a[], int n){
-    int curmax = a[0];
-    int resultmax = a[0];
+// // kadane's algorithm
 
-    for (int i = 1; i < n; i++){
-        curmax = max(a[i], curmax + a[i]);
+// int kadanes(int a[], int n){
+//     int curmax = a[0];
+//     int resultmax = a[0];
 
-        if (curmax > resultmax) {
-            resultmax = curmax;
-        }   
-    }
+//     for (int i = 1; i < n; i++){
+//         curmax = max(a[i], curmax + a[i]);
 
-    return resultmax;
-}
+//         if (curmax > resultmax) {
+//             resultmax = curmax;
+//         }   
+//     }
 
-int main(void) {
-    int a[] = {-2, -3, 4, -1, -2, 1, 5, -3};
-    int n = sizeof(a) / sizeof(a[0]);
+//     return resultmax;
+// }
 
-    int maxsum = kadanes(a, n);
+// int main(void) {
+//     int a[] = {-2, -3, 4, -1, -2, 1, 5, -3};
+//     int n = sizeof(a) / sizeof(a[0]);
 
-    printf("Maximum contiguous sum is %d\n", maxsum);
-}
+//     int maxsum = kadanes(a, n);
+
+//     printf("Maximum contiguous sum is %d\n", maxsum);
+// }
 

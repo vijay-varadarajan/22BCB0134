@@ -12,8 +12,7 @@ int max(int a, int b)
 
 int lcs(char* X, char* Y, int m, int n)
 {
-    int C[m + 1][n + 1];
-    int ipos[m];
+
     int k = 0;
  
     for (int i = 0; i < m + 1; i++) {
@@ -63,10 +62,10 @@ int lcs(char* X, char* Y, int m, int n)
 
 int main()
 {
-    char* S1 = "ABCDGHKL";
-    char* S2 = "AEDFHRKL";
-    int m = sizeof(S1) / sizeof(S1[0]);
-    int n = sizeof(S2) / sizeof(S2[0]);
+    char* S1 = "ABCBADB";
+    char* S2 = "BDCBAA";
+    int m = 7;
+    int n = 6;
  
     printf("Length of LCS is %d\n", lcs(S1, S2, m, n));
  

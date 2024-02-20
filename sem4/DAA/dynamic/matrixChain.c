@@ -5,10 +5,10 @@ typedef struct Matrix {
     int s;
 } Matrix;
 
-int n = 3;
-Matrix mats[3];
-int minvalarray[3][3];
-int karray[3][3];
+int n = 5;
+Matrix mats[5];
+int minvalarray[5][5];
+int karray[5][5];
 
 int m(int i, int j);
 
