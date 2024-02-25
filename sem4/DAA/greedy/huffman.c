@@ -50,6 +50,7 @@ void printHuffCodes(minHeapNode* root, int arr[], int top){
 
 int main(void){
     int n;
+    printf("By Vijay Varadarajan, 22BCB0134\n");
     printf("Enter the number of letters: ");
     scanf("%d", &n);
     getchar(); // consume the newline character
@@ -72,7 +73,7 @@ int main(void){
 
     minHeapNode *root = buildHuffTree(letters, freqs, size);
 
-    int arr[size], top = 0;
+    int arr[size], top = 0;                                 
     printHuffCodes(root, arr, top);
 }
 

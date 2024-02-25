@@ -1,36 +1,34 @@
 // A C program to find minimum possible time by the car chassis to complete 
 #include <stdio.h> 
-#define NUM_LINE 2 
 #define NUM_STATION 4 
   
 // Utility function to find minimum of two numbers 
 int min(int a, int b) { return a < b ? a : b; } 
   
-int carAssembly(int a[][NUM_STATION], int t[][NUM_STATION], int *e, int *x) 
+int ALS(int a[][NUM_STATION], int t[][NUM_STATION]) 
 { 
-    int T1[NUM_STATION], T2[NUM_STATION], i; 
+    int F1[NUM_STATION], F2[NUM_STATION], j; 
   
-    T1[0] = e[0] + a[0][0]; // time taken to leave first station in line 1 
-    T2[0] = e[1] + a[1][0]; // time taken to leave first station in line 2 
+    F1[0] = a[0][0];
+    F2[0] = a[1][0];
+    printf("%d %d\n", F1[0], F2[0]);
   
-    // Fill tables T1[] and T2[] using the above given recursive relations 
-    for (i = 1; i < NUM_STATION; ++i) 
+    for (j = 1; j < NUM_STATION; j++) 
     { 
-        T1[i] = min(T1[i-1] + a[0][i], T2[i-1] + t[1][i] + a[0][i]); 
-        T2[i] = min(T2[i-1] + a[1][i], T1[i-1] + t[0][i] + a[1][i]); 
+        F1[j] = min(F1[j-1] + a[0][j], F2[j-1] + t[1][j-1] + a[0][j]); 
+        F2[j] = min(F2[j-1] + a[1][j], F1[j-1] + t[0][j-1] + a[1][j]); 
+        printf("%d %d\n", F1[j], F2[j]);
     } 
   
-    // Consider exit times and return minimum 
-    return min(T1[NUM_STATION-1] + x[0], T2[NUM_STATION-1] + x[1]); 
+    return min(F1[NUM_STATION-1], F2[NUM_STATION-1]); 
 } 
   
 int main() 
 { 
-    int a[][NUM_STATION] = {{4, 5, 3, 2}, {2, 10, 1, 4}}; 
-    int t[][NUM_STATION] = {{0, 7, 4, 5}, {0, 9, 2, 8}}; 
-    int e[] = {10, 12}, x[] = {18, 7}; 
+    int t[][NUM_STATION] = {{2, 3, 2}, {1, 2, 4}}; 
+    int a[][NUM_STATION] = {{10, 20, 15, 15}, {10, 15, 20, 10}}; 
     
-    printf("%d", carAssembly(a, t, e, x)); 
+    printf("Minimum: %d", ALS(a, t)); 
   
     return 0; 
 } 
