@@ -25,9 +25,18 @@ long karatsuba(long x, long y){
    long a = x - (b * multiplier);
    long d = y / multiplier;
    long c = y - (d * multiplier);
+
+   printf("\nSplit (%d, %d): \n%d %d \n%d %d\n", x, y, b, a, d, c);
+   
    long u = karatsuba(a, c);
+   printf("%d * %d = %d\n", a, c, u);
+
    long v = karatsuba(b, d);
+   printf("%d * %d = %d\n", b, d, v);
+   
    long z = karatsuba(a + b, c + d);
+   printf("%d * %d = %d\n", a+b, c+d, z);
+
    return u + ((z - u - v) * multiplier) + (v * (long)(pow(10, 2 * size)));
 }
 
