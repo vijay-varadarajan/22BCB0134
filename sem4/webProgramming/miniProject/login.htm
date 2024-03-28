@@ -37,7 +37,7 @@
     <div id="form-header">
         <h1>Login</h1>
     </div>
-    <form action="/">
+    <form method="post" id="loginForm" onsubmit="return validate(event)">
         <div class="form-container">
             <div class="form-top">
                 <div class="form-col">
@@ -58,7 +58,7 @@
         </div>
     </form>
 </div>  
-
+<script src="login.js"></script>
 </body>
 
 </html>
