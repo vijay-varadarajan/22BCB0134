@@ -47,3 +47,8 @@ int main()
   
     return 0; 
 } 
+
+
+
+// Generalized: fi[j] = ---> a[i][1] if (j = 1)
+//                      ---> min|(a<=k<=m)(f[k][j-1] + t[k][j-1][i] + a[i][j]) if (j > 1)

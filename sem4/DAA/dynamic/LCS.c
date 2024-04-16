@@ -12,6 +12,8 @@ int max(int a, int b)
 
 int lcs(char* X, char* Y, int m, int n)
 {
+    int C[m + 1][n + 1]; // Declare the 2D array C
+    int ipos[m]; // Declare the array to store the indexes of the LCS
 
     int k = 0;
  
@@ -45,7 +47,7 @@ int lcs(char* X, char* Y, int m, int n)
             k++;
             i--;
             j--;
-        } else if(C[i-1][j] > C[i][j-1]){
+        } else if(C[i-1][j] >= C[i][j-1]){
             i--;
         } else {
             j--;
