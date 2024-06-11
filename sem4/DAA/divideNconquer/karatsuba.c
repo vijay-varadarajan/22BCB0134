@@ -37,7 +37,7 @@ long karatsuba(long x, long y){
    long z = karatsuba(a + b, c + d);
    printf("%d * %d = %d\n", a+b, c+d, z);
 
-   return u + ((z - u - v) * multiplier) + (v * (long)(pow(10, 2 * size)));
+   return u + ((z - u - v) * multiplier) + (v * (long)(pow(multiplier, 2)));
 }
 
 int main(){

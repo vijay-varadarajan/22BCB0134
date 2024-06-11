@@ -53,5 +53,6 @@
     "random": "c"
   },
   "C_Cpp.default.compilerPath": "c:\\msys64\\ucrt64\\bin\\gcc.exe",
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
+  "r.lsp.promptToInstall": false
 }

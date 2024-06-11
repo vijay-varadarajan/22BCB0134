@@ -1,139 +1,67 @@
 #include <stdio.h>
+#include <string.h>
 
-
-void swap(int *a, int *b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+void clear_input_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) { }
 }
 
+int max(int a, int b) { return a > b ? a : b; }
 
-void insertionSort(int A[], int n){
-    for (int i = 1; i < n; i++){
-        int key = A[i];
-        int j = i - 1;
+void LCS(char* a, char* b){
+    int i, j;
 
-        while(j >= 0 && A[j] > key){
-            A[(j--)+1] = A[j];
+    int m = 8, n = 8;
+
+    int C[m+1][n+1];
+
+    for (int i = 0; i < m+1; i++){
+        for(int j = 0; j < n+1; j++){
+            if (i == 0 || j == 0){
+                C[i][j] = 0;
+            }
+            else if (a[i-1] == b[j-1]){
+                C[i][j] = C[i-1][j-1] + 1;
+            }
+            else {
+                C[i][j] = max(C[i-1][j], C[i][j-1]);
+            }
         }
-        
-        // improvisation
-        while (j >= 0 && A[j] == key) {
+    }
+
+    for (int i = 0; i < m+1; i++){
+        for(int j = 0; j < n+1; j++){
+            printf("%d ", C[i][j]);
+        } printf("\n");
+    }
+
+    i = m, j = n;
+    int k = 0;
+    int ipos[n];
+
+    while(i > 0 || j > 0){
+        if (a[i-1] == b[j-1]){
+            ipos[k] = i-1;
+            i--;
             j--;
-        }
-
-        A[j+1] = key;
-    }
-}
-
-
-void selectionSort(int A[], int n){
-    for(int i = 0; i < n; i++){
-        int k = i;
-        for (int j = i; j < n; j++){
-            if (A[j] < A[k])
-                k = j;
-        }
-        swap(&A[i], &A[k]);
-    }
-}
-
-
-void merge(int A[], int low, int mid, int high){
-    int i = low, j = mid + 1, k = low; 
-    int C[high - low +1];
-    while (i <= mid && j <= high){
-        if (A[i] < A[j])
-            { C[k - low] = A[i]; i++; k++; }
-        else
-            { C[k - low] = A[j]; j++; k++; }
-    }
-
-    while (i <= mid)
-        { C[k - low] = A[i]; i++; k++; }
-
-    while (j <= high)
-        { C[k - low] = A[j]; j++; k++; }
-
-    for (int i = low; i <= high; i++){
-        A[i] = C[i - low];
-    }
-}
-
-
-void mergeSort(int A[], int low, int high){
-    if (low < high){
-        int mid = (low + high)/2;
-        mergeSort(A, low, mid);
-        mergeSort(A, mid+1, high);
-        merge(A, low, mid, high);
-    }
-}
-
-int findmax(int A[], int n){
-    int max = 0;
-    for(int i = 0; i < n; i++){
-        if (A[i] > max)
-            max = A[i];
-    }
-    return max;
-}
-
-void countSort(int A[], int n){
-    int max = findmax(A, n);
-    int count[max+1];
-    
-    for (int i = 0; i < n; i++)
-        { count[i] = 0; }
-
-    for(int i = 0; i < n; i++)
-        { count[A[i]]++; }
-
-    int i = 0, j = 0;
-    while (j <= max){
-        if (count[j] > 0){
-            A[i++] = j;
-            count[j]--;
+            k++;
+        } else if (C[i][j-1] > C[i-1][j]) {
+            j--;
         } else {
-            j++;
+            i--;
         }
     }
-}
 
-int partition(int A[], int low, int high){
-    int pivot_item = A[low];
-    int left = low, right = high;
-
-    while (left < right)
-    {
-        while (A[left] <= pivot_item && left != high){
-            left++;
-        }
-        while (A[right] > pivot_item){
-            right--;
-        }
-        if (left < right)
-            swap(&A[left], &A[right]);
-    }
-
-    A[low] = A[right];
-    A[right] = pivot_item;
-
-    return right;
-}
-
-void quickSort(int A[], int low, int high){
-    if (low < high){
-        int part_ind = partition(A, low, high);
-        quickSort(A, low, part_ind-1);
-        quickSort(A, part_ind+1, high);
+    for(int i = k-1; i >= 0; i--){
+        printf("%c ", a[ipos[i]]);
     }
 }
 
 int main(void){
-    int A[] = {2,1,4,3,6,5,0,3,4,9,8,7}, n = 12;
-    quickSort(A, 0, n-1);
-    for (int i = 0; i < n; i++){
-        printf("%d ", A[i]);
-    }
+    char a[8] = "ABCDGHKL";
+    char b[8] = "AEDFHRKL";
+
+    LCS(a, b);
+
+    return 0;
 }
