@@ -1,0 +1,6 @@
+Symbol Name	Type	Attributes
+-----------------------------------
+main		int	
+a		int	
+b		int	
+c		int	
