@@ -299,4 +299,4 @@ UPDATE Employee SET door_no = '980', street = 'Dallas', city = 'Houston', state 
 UPDATE Employee SET door_no = '2365', street = 'Newcastle Rd', city = 'Bellaire', state = 'TX', continent = 'North America' WHERE SSN_Number = '943775543';
 
 ALTER TABLE Employee
-MODIFY Salary NUMBER(10,2);
+MODIFY Salary REAL;
