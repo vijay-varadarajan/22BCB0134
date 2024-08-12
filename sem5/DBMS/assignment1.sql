@@ -1,3 +1,13 @@
+CREATE DATABASE "DBMS_lab"
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LOCALE_PROVIDER = 'libc'
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+
 CREATE TABLE Employee (
     First_Name VARCHAR(15),
     Mid_Name CHAR(2),
@@ -300,3 +310,130 @@ UPDATE Employee SET door_no = '2365', street = 'Newcastle Rd', city = 'Bellaire'
 
 ALTER TABLE Employee
 MODIFY Salary REAL;
+
+
+-- Exercise 3
+create table Physician (
+    employeeid number(5) primary key,
+    name varchar(50),
+    position varchar(20),
+    ssn number(9) unique
+);
+
+create table Department (
+    departmentid number(5) primary key,
+    name varchar (20),
+    head number(9) references Physician(employeeid)
+);
+
+create table Works_With (
+    physician number(5) references Physician(employeeid),
+    department number(5) references Department(departmentid),
+    primaryaffiliation char(1) check (primaryaffiliation in ('Y', 'N')),
+    primary key (physician, department)
+);
+
+create table Procedure (
+    code number(5) primary key,
+    name varchar(20),
+    cost decimal(8, 2)
+)
+
+create table patient (
+    ssn number(9) primary key,
+    name varchar(50),
+    address varchar(100),
+    phone number(10),
+    insuranceid number(7),
+    pcp number(9) references Physician(employeeid)
+)
+
+create table nurse (
+    employeeid number(5) primary key,
+    name varchar(50),
+    position varchar(20),
+    registered char(1) check (registered in ('Y', 'N')),
+    ssn number(9) unique
+)
+
+create table appointment (
+    appointmentid number(3) unique,
+    patientid number(9) references patient(ssn),
+    prepnurse number(6) references nurse(employeeid),
+    physician number(6) references physician(employeeid),
+    appointmentdate date,
+    start_time timestamp,
+    end_time timestamp,
+    examinationroom number(3),
+)
+
+-- Insert required data into each relation (min. FIVE) under exercise 3
+INSERT INTO Physician (employeeid, name, position, ssn) VALUES (1, 'Dr. John Doe', 'Cardiologist', 123456789);
+INSERT INTO Physician (employeeid, name, position, ssn) VALUES (2, 'Dr. Jane Doe', 'Neurologist', 987654321);
+INSERT INTO Physician (employeeid, name, position, ssn) VALUES (3, 'Dr. John Smith', 'Orthopedic', 123123123);
+INSERT INTO Physician (employeeid, name, position, ssn) VALUES (4, 'Dr. Jane Smith', 'Pediatrician', 987987987);
+INSERT INTO Physician (employeeid, name, position, ssn) VALUES (5, 'Dr. Michael Jackson', 'ENT Specialist', 111111111);
+
+INSERT INTO Department (departmentid, name, head) VALUES (1, 'Cardiology', 1);
+INSERT INTO Department (departmentid, name, head) VALUES (2, 'Neurology', 2);
+INSERT INTO Department (departmentid, name, head) VALUES (3, 'Orthopedic', 3);
+INSERT INTO Department (departmentid, name, head) VALUES (4, 'Pediatrics', 4);
+INSERT INTO Department (departmentid, name, head) VALUES (5, 'ENT Specialization', 5);
+
+INSERT INTO Works_With (physician, department, primaryaffiliation) VALUES (1, 1, 'Y');
+INSERT INTO Works_With (physician, department, primaryaffiliation) VALUES (2, 2, 'Y');
+INSERT INTO Works_With (physician, department, primaryaffiliation) VALUES (3, 3, 'Y');
+INSERT INTO Works_With (physician, department, primaryaffiliation) VALUES (4, 4, 'Y');
+INSERT INTO Works_With (physician, department, primaryaffiliation) VALUES (5, 5, 'Y');
+
+INSERT INTO Procedure (code, name, cost) VALUES (1, 'Heart Surgery', 10000.00);
+INSERT INTO Procedure (code, name, cost) VALUES (2, 'Brain Surgery', 20000.00);
+INSERT INTO Procedure (code, name, cost) VALUES (3, 'Knee Surgery', 30000.00);
+INSERT INTO Procedure (code, name, cost) VALUES (4, 'Pediatric Surgery', 40000.00);
+INSERT INTO Procedure (code, name, cost) VALUES (5, 'Skin Surgery', 50000.00);
+
+INSERT INTO patient (ssn, name, address, phone, insuranceid, pcp) VALUES (121212121, 'Alice', '1234 Wonderland', 1234567890, 1234561, 1);
+INSERT INTO patient (ssn, name, address, phone, insuranceid, pcp) VALUES (343434343, 'Bob', '5678 Wonderland', 1234567890, 1234562, 2);
+INSERT INTO patient (ssn, name, address, phone, insuranceid, pcp) VALUES (565656565, 'Charlie', '91011 Wonderland', 1234567890, 1234563, 3);
+INSERT INTO patient (ssn, name, address, phone, insuranceid, pcp) VALUES (787878787, 'David', '121314 Wonderland', 1234567890, 1234564, 4);
+INSERT INTO patient (ssn, name, address, phone, insuranceid, pcp) VALUES (909090909, 'Eve', '151617 Wonderland', 1234567890, 1234565, 5);
+
+INSERT INTO nurse (employeeid, name, position, registered, ssn) VALUES (1, 'Nurse Fiona', 'Registered Nurse', 'Y', 999999999);
+INSERT INTO nurse (employeeid, name, position, registered, ssn) VALUES (2, 'Nurse Grey', 'Registered Nurse', 'Y', 888888888);
+INSERT INTO nurse (employeeid, name, position, registered, ssn) VALUES (3, 'Nurse Harry', 'Registered Nurse', 'Y', 777777777);
+INSERT INTO nurse (employeeid, name, position, registered, ssn) VALUES (4, 'Nurse Immanuel', 'Registered Nurse', 'Y', 666666666);
+INSERT INTO nurse (employeeid, name, position, registered, ssn) VALUES (5, 'Nurse Jenny', 'Registered Nurse', 'Y', 555555555);
+
+INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appointmentdate, start_time, end_time, examinationroom) VALUES (1, 121212121, 1, 1, TO_DATE('01-JAN-21', 'DD-MON-YY'), TO_TIMESTAMP('01-JAN-21 10:00:00', 'DD-MON-YY HH24:MI:SS'), TO_TIMESTAMP('01-JAN-21 11:00:00', 'DD-MON-YY HH24:MI:SS'), 021);
+INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appointmentdate, start_time, end_time, examinationroom) VALUES (2, 343434343, 2, 2, TO_DATE('02-JAN-21', 'DD-MON-YY'), TO_TIMESTAMP('02-JAN-21 10:00:00', 'DD-MON-YY HH24:MI:SS'), TO_TIMESTAMP('02-JAN-21 11:00:00', 'DD-MON-YY HH24:MI:SS'), 022);
+INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appointmentdate, start_time, end_time, examinationroom) VALUES (3, 565656565, 3, 3, TO_DATE('03-JAN-21', 'DD-MON-YY'), TO_TIMESTAMP('03-JAN-21 10:00:00', 'DD-MON-YY HH24:MI:SS'), TO_TIMESTAMP('03-JAN-21 11:00:00', 'DD-MON-YY HH24:MI:SS'), 023);
+INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appointmentdate, start_time, end_time, examinationroom) VALUES (4, 787878787, 4, 4, TO_DATE('04-JAN-21', 'DD-MON-YY'), TO_TIMESTAMP('04-JAN-21 10:00:00', 'DD-MON-YY HH24:MI:SS'), TO_TIMESTAMP('04-JAN-21 11:00:00', 'DD-MON-YY HH24:MI:SS'), 024);
+INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appointmentdate, start_time, end_time, examinationroom) VALUES (5, 909090909, 5, 5, TO_DATE('05-JAN-21', 'DD-MON-YY'), TO_TIMESTAMP('05-JAN-21 10:00:00', 'DD-MON-YY HH24:MI:SS'), TO_TIMESTAMP('05-JAN-21 11:00:00', 'DD-MON-YY HH24:MI:SS'), 025);
+
+
+
+select * from Physician;
+
+insert into PROCEDURE (code, name, cost) values (6, 'Physiotherapy', 6000.00);
+insert into PROCEDURE (code, name, cost) values (7, 'Gastric Surgery', 7000.00);
+insert into PROCEDURE (code, name, cost) values (8, 'Gastric problem', 7000.39);
+
+select name, cost from Procedure where name IN ('Physiotherapy', 'Gastric problem');
+
+select name from physician where employeeid in (
+    select physician from works_with where primaryaffiliation = 'N'
+);
+
+insert into physician (employeeid, name, position, ssn) values (6, 'Dr. Emerald Green', 'Psychotherapist', 1234512345);
+
+select * from physician where name like 'Dr. E%';
+
+-- 5)	Write a SQL query to find the details of the patients whose appointment time is greater than 12.30 PM for a corresponding date.
+
+
+INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appointmentdate, start_time, end_time, examinationroom) VALUES (6, 787878787, 4, 4, TO_DATE('14-JAN-21', 'DD-MON-YY'), TO_TIMESTAMP('14-JAN-21 12:40:00', 'DD-MON-YY HH24:MI:SS'), TO_TIMESTAMP('04-JAN-21 13:00:00', 'DD-MON-YY HH24:MI:SS'), 026);
+INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appointmentdate, start_time, end_time, examinationroom) VALUES (7, 909090909, 5, 5, TO_DATE('15-JAN-21', 'DD-MON-YY'), TO_TIMESTAMP('15-JAN-21 13:00:00', 'DD-MON-YY HH24:MI:SS'), TO_TIMESTAMP('05-JAN-21 14:00:00', 'DD-MON-YY HH24:MI:SS'), 027);
+INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appointmentdate, start_time, end_time, examinationroom) VALUES (8, 121212121, 4, 4, TO_DATE('14-JAN-21', 'DD-MON-YY'), TO_TIMESTAMP('14-JAN-21 13:40:00', 'DD-MON-YY HH24:MI:SS'), TO_TIMESTAMP('04-JAN-21 14:00:00', 'DD-MON-YY HH24:MI:SS'), 026);
+
+
+select * from appointment where start_time > TO_TIMESTAMP('01-JAN-21 12:30:00', 'DD-MON-YY HH24:MI:SS');
