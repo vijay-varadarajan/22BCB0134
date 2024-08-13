@@ -285,28 +285,24 @@ MODIFY Project_name UNIQUE;
 ALTER TABLE Employee
 MODIFY Sex NOT NULL;
 
--- add subfields of address
-ALTER TABLE EMPLOYEE
-ADD (
-    door_no VARCHAR2(10),
-    street VARCHAR2(50),
-    city VARCHAR2(30),
-    state VARCHAR2(30),
-    continent VARCHAR2(30)
+-- new address type
+create type addressType as OBJECT (
+    door_no number(3),
+    street varchar(50),
+    city varchar(20),
+    state varchar(20),
+    continent varchar(20)
 );
 
--- re insert all the addresses
-UPDATE Employee SET door_no = '11', street = 'S 59 E', city = 'Salt Lake City', state = 'UT', continent = 'North America' WHERE SSN_Number = '554433221';
-UPDATE Employee SET door_no = '35', street = 'S 18 E', city = 'Salt Lake City', state = 'UT', continent = 'North America' WHERE SSN_Number = '543216789';
-UPDATE Employee SET door_no = '638', street = 'Voss', city = 'Houston', state = 'TX', continent = 'North America' WHERE SSN_Number = '333445555';
-UPDATE Employee SET door_no = '291', street = 'Berry', city = 'Bellaire', state = 'TX', continent = 'North America' WHERE SSN_Number = '987654321';
-UPDATE Employee SET door_no = '731', street = 'Fondren', city = 'Houston', state = 'TX', continent = 'North America' WHERE SSN_Number = '123456789';
-UPDATE Employee SET door_no = '975', street = 'Fire Oak', city = 'Humble', state = 'TX', continent = 'North America' WHERE SSN_Number = '666884444';
-UPDATE Employee SET door_no = '5631', street = 'Rice', city = 'Houston', state = 'TX', continent = 'North America' WHERE SSN_Number = '453453453';
-UPDATE Employee SET door_no = '450', street = 'Stone', city = 'Houston', state = 'TX', continent = 'North America' WHERE SSN_Number = '888665555';
-UPDATE Employee SET door_no = '3321', street = 'Castle', city = 'Spring', state = 'TX', continent = 'North America' WHERE SSN_Number = '999887777';
-UPDATE Employee SET door_no = '980', street = 'Dallas', city = 'Houston', state = 'TX', continent = 'North America' WHERE SSN_Number = '987987987';
-UPDATE Employee SET door_no = '2365', street = 'Newcastle Rd', city = 'Bellaire', state = 'TX', continent = 'North America' WHERE SSN_Number = '943775543';
+SELECT first_name, last_name,
+       TREAT(address AS AddressType).door_no AS door_no,
+       TREAT(address AS AddressType).street AS street,
+       TREAT(address AS AddressType).city AS city,
+       TREAT(address AS AddressType).state AS state,
+       TREAT(address AS AddressType).continent AS continent
+FROM employee;
+
+
 
 ALTER TABLE Employee
 MODIFY Salary REAL;
