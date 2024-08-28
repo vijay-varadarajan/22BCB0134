@@ -1,15 +1,15 @@
 If using a bash CLI, 
 
 TYPE :
-    ```bash
+```bash
     chmod +x compile.sh
-    ```
-    ```bash
+```
+```bash
     ./compile.sh
-    ```
-    ```bash
+```
+```bash
     java main
-    ```
+```
 
 If using a windows CLI,
 
