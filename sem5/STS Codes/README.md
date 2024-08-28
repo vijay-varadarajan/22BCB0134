@@ -2,21 +2,21 @@ If using a bash CLI,
 
 TYPE :
 ```bash
-    chmod +x compile.sh
+chmod +x compile.sh
 ```
 ```bash
-    ./compile.sh
+./compile.sh
 ```
 ```bash
-    java main
+java main
 ```
 
 If using a windows CLI,
 
 TYPE :
 ```bash
-    javac <All file names with space>
+javac <All file names with space>
 ```
 ```bash
-    java main
+java main
 ```
