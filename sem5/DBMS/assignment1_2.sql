@@ -433,3 +433,216 @@ INSERT INTO appointment (appointmentid, patientid, prepnurse, physician, appoint
 
 
 select * from appointment where start_time > TO_TIMESTAMP('01-JAN-21 12:30:00', 'DD-MON-YY HH24:MI:SS');
+
+--Assignment 2
+
+select first_name, mid_name, last_name, salary from employee where salary > 25000;
+
+select first_name, mid_name, last_name, salary from employee where salary between 30000 and 70000;
+
+select first_name, mid_name, last_name, supervisor_ssn from employee where supervisor_ssn is null;
+
+-- 4)	Display the bdate of all employee s in the format ‘DDthMonthYYYY’.
+SELECT TO_CHAR(bdate, 'DDthMonthYYYY') AS formatted_bdate
+FROM employee;
+
+--  Display the employee names whose bdate is on or before 1978. 
+SELECT first_name, last_name FROM employee WHERE bdate <= TO_DATE('31-DEC-78', 'DD-MON-YY');
+
+--Display the employee names having ‘salt lake’ in their address. 
+SELECT first_name, last_name FROM employee WHERE address LIKE '%Salt Lake%';
+
+--Display the department name that starts with ’M’.
+SELECT department_name FROM department WHERE department_name LIKE 'M%';
+
+--Display the department names’ that ends with ‘E’.
+SELECT department_name FROM department WHERE department_name LIKE '%E';
+
+--Display the names of all the employees having supervisor with any of the following SSN 554433221, 333445555. 
+SELECT first_name, last_name FROM employee WHERE supervisor_ssn IN ('554433221', '333445555');
+
+--Display all the department names in upper case and lower case.
+SELECT UPPER(department_name) AS department_name_upper, LOWER(department_name) AS department_name_lower FROM department;
+
+-- Display the first four characters and last four of the department names using SUBSTR
+SELECT 
+    SUBSTR(department_name, 1, 4) AS first_four, 
+    SUBSTR(department_name, -4) AS last_four 
+FROM department;
+
+-- Display the substring of the Address (starting from 5th position to 11 th position) of all employees. 
+SELECT SUBSTR(address, 5, 11) AS address_substring FROM employee;
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('Doug', 'E', 'Gilbert', '554433221', TO_DATE('09-JUN-60', 'DD-MON-YY'), '11 S 59 E, Salt Lake City, UT', 'M', 80000, NULL, 3);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('Joyce', 'A', 'PAN', '543216789', TO_DATE('07-FEB-78', 'DD-MON-YY'), '35 S 18 E, Salt Lake City, UT', 'F', 70000, NULL, 2);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('Franklin', 'T', 'Wong', '333445555', TO_DATE('08-DEC-45', 'DD-MON-YY'), '638 Voss, Houston, TX', 'M', 40000, '554433221', 5);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('Jennifer', 'S', 'Wallace', '987654321', TO_DATE('20-JUN-31', 'DD-MON-YY'), '291 Berry, Bellaire, TX', 'F', 43000, '554433221', 4);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('John', 'B', 'Smith', '123456789', TO_DATE('09-JAN-55', 'DD-MON-YY'), '731 Fondren, Houston, TX', 'M', 30000, '333445555', 5);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('Ramesh', 'K', 'Narayan', '666884444', TO_DATE('15-SEP-52', 'DD-MON-YY'), '975 Fire Oak, Humble, TX', 'M', 38000, '333445555', 5);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('Joyce', 'A', 'English', '453453453', TO_DATE('31-JUL-62', 'DD-MON-YY'), '5631 Rice, Houston, TX', 'F', 25000, '333445555', 5);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('James', 'E', 'Borg', '888665555', TO_DATE('10-NOV-27', 'DD-MON-YY'), '450 Stone, Houston, TX', 'M', 55000, '543216789', 1);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('Alicia', 'J', 'Zelaya', '999887777', TO_DATE('19-JUL-58', 'DD-MON-YY'), '3321 Castle, Spring, TX', 'F', 25000, '987654321', 4);
+
+INSERT INTO Employee (First_Name, Mid_Name, Last_Name, SSN_Number, Birthday, Address, Sex, Salary, Supervisor_SSN, Department_Number) 
+VALUES 
+('Ahmad', 'V', 'Jabbar', '987987987', TO_DATE('29-MAR-59', 'DD-MON-YY'), '980 Dallas, Houston, TX', 'M', 25000, '987654321', 4);
+
+-- Display the Mgrstartdate on adding three months to it. 
+SELECT ADD_MONTHS(ManageStartDate, 3) AS MgrStartDate FROM Department;
+
+--Display the age of all the employees rounded to two digits.
+SELECT 
+    First_Name,
+    Last_Name,
+    Birthday,
+    ROUND(
+        (SYSDATE - TO_DATE(TO_CHAR(Birthday, 'DD-MON-YYYY'), 'DD-MON-YYYY')) / 365.25,
+        2
+    ) AS Age
+FROM 
+    Employee
+
+-- Find the last day and next day of the month in which each manager has joined. 
+SELECT 
+    Department_Name,
+    ManageStartDate,
+    LAST_DAY(ManageStartDate) AS Last_Day,
+    NEXT_DAY(ManageStartDate, 'SUNDAY') AS Next_Day
+FROM
+    Department;
+
+
+-- For the relational schema given as part of Assessment – 1, write the SQL queries using Group 
+-- Functions to get the following information. 
+-- 1) How many different departments are there in the ‘employee’ table. 
+-- 2) For each department display the minimum and maximum employee salaries. 
+-- 3) Print the average annual salary. 
+-- 4) Count the number of employees over 30 age. 
+-- 5) Print the Department name and average salary of each department. 
+-- 6) Display the department name which contains more than 30 employees. 
+-- 7) Calculate the average salary of employees by department and age 
+-- 8) Count separately the number of employees in the finance and research department. 
+-- 9) List out the employees based on their seniority. 
+-- 10) List out the employees who works in ‘manufacture’ department group by first name.
+-- Use group in all the queries
+
+-- 1) How many different departments are there in the ‘employee’ table.
+SELECT COUNT(DISTINCT Department_Number) AS Department_Count FROM Employee;
+
+-- 2) For each department display the minimum and maximum employee salaries.
+SELECT 
+    Department_Number,
+    MIN(Salary) AS Min_Salary,
+    MAX(Salary) AS Max_Salary
+FROM
+
+    Employee
+
+GROUP BY Department_Number;
+
+-- 3) Print the average annual salary.
+SELECT AVG(Salary) AS Avg_Salary FROM Employee;
+
+-- 4) Count the number of employees over 30 age.
+SELECT COUNT(*) AS Over_30_Employees FROM Employee WHERE EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM Birthday) > 30;
+
+-- 5) Print the Department name and average salary of each department.
+SELECT 
+    Department.Department_Name,
+    AVG(Employee.Salary) AS Avg_Salary
+FROM
+    Employee
+
+JOIN Department ON Employee.Department_Number = Department.Department_Number
+
+GROUP BY Department.Department_Name;
+
+-- 6) Display the department name which contains more than 30 employees.
+SELECT 
+    Department.Department_Name
+
+FROM
+    Employee
+
+JOIN Department ON Employee.Department_Number = Department.Department_Number
+
+GROUP BY Department.Department_Name
+
+HAVING COUNT(*) > 30;
+
+-- 7) Calculate the average salary of employees by department and age
+SELECT 
+    d.Department_Name,
+    FLOOR((e.Birthday - SYSDATE) / 365.25) AS Age,
+    ROUND(AVG(e.Salary), 2) AS Average_Salary
+FROM 
+    Employee e
+JOIN 
+    Dept d ON e.Department_Number = d.Department_Number
+GROUP BY 
+    d.Department_Name,
+    FLOOR((e.Birthday-SYSDATE) / 365.25)
+ORDER BY 
+    d.Department_Name,
+    Age;
+
+-- 8) Count separately the number of employees in the finance and research department.
+SELECT 
+    Department.Department_Name,
+    COUNT(*) AS Employee_Count
+FROM
+    Employee
+
+JOIN Department ON Employee.Department_Number = Department.Department_Number
+
+WHERE Department.Department_Name IN ('Finance', 'Research')
+
+GROUP BY Department.Department_Name;
+
+-- 9) List out the employees based on their seniority.
+SELECT 
+    First_Name,
+    Last_Name,
+    Salary,
+    RANK() OVER (ORDER BY Salary DESC) AS Seniority
+FROM
+    Employee;
+
+-- 10) List out the employees who works in ‘manufacture’ department group by first name.
+SELECT 
+    First_Name,
+    COUNT(*) AS Employee_Count
+FROM
+    Employee
+
+JOIN Department ON Employee.Department_Number = Department.Department_Number
+    
+    WHERE Department.Department_Name = 'Manufacture'    
+
+GROUP BY First_Name;

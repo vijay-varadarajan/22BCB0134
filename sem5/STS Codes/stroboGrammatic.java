@@ -2,7 +2,7 @@ import java.util.*;
 
 public class stroboGrammatic {
     public boolean stroboGramm(String strob) {
-        Map<Character, Character>  stringMap = new HashMap<Character, Character>();
+        Map<Character, Character> stringMap = new HashMap<Character, Character>();
 
         stringMap.put('0', '0');
         stringMap.put('1', '1');
@@ -25,7 +25,7 @@ public class stroboGrammatic {
             left ++;
             right --;
         }
-        System.out.print("Number is a strobogrammatic number.");
+        System.out.print ("Number is a strobogrammatic number.");
         return true;
     }
 }
