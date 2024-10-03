@@ -646,3 +646,40 @@ JOIN Department ON Employee.Department_Number = Department.Department_Number
     WHERE Department.Department_Name = 'Manufacture'    
 
 GROUP BY First_Name;
+
+
+
+-- 1) find the employee who is getting highest salary in the department research
+SELECT FName, LName FROM Employee JOIN Department ON Employee.Department_Number = Department.Department_Number 
+WHERE Department.Department_Name = "Research" AND Salary = MAX(Salary)
+
+
+-- 2)
+SELECT FName, LName FROM Employee where salary = MIN(salary) group by department
+
+-- 3) 
+SELECT FName, LName FROM Employee 
+WHERE Salary > AVG( 
+    SELECT Employee.Salary from Employee JOIN Dept ON Employee.Department_Number = Department.Department_Number WHERE Dept.Dept_Number = 2
+);
+
+
+select count(first_name) from employee join dept on employee.department_number = dept.department_number 
+    group by dept.department_number;
+
+--5)	Find out the department name having highest employee strength 
+SELECT Department_Name FROM Department WHERE Department_Number = (SELECT Department_Number FROM Employee GROUP BY Department_Number ORDER BY COUNT(*) DESC LIMIT 1);
+
+--8)	Create a view to display the employee details who is working in Finance department. 
+CREATE VIEW Finance_Employees AS SELECT * FROM Employee WHERE Department_Number = (SELECT Department_Number FROM Department WHERE Department_Name = 'Finance');
+-- open the created view
+SELECT * FROM Finance_Employees;
+
+--9) Create a logical table to store employee details who is getting salary more than 10000. 
+CREATE VIEW High_Salary_Employees AS SELECT * FROM Employee WHERE Salary > 10000;
+
+--10) 10) Create a table to store the employees details based on the department no
+CREATE VIEW Department_Employees AS SELECT * FROM Employee ORDER BY Department_Number;
+
+--10)	Retrieve the names of the employees who have 2 or more dependents
+SELECT First_Name, Last_Name FROM Employee WHERE SSN_Number IN (SELECT SSN_Number FROM Dependent GROUP BY SSN_Number HAVING COUNT(*) >= 2);
