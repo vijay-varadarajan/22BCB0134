@@ -1,11 +1,9 @@
 import regex
 
 def ip_to_bin_octets(ip):
-    """Converts an IP address into its binary octet representation."""
     return ''.join(f'{int(octet):08b}' for octet in ip.split('.'))
 
 def bin_octets_to_ip(bin_ip):
-    """Converts binary octets to dotted decimal notation."""
     return '.'.join(str(int(bin_ip[i:i+8], 2)) for i in range(0, len(bin_ip), 8))
 
 def output(ip):
@@ -34,50 +32,51 @@ def output(ip):
         netid = ''
         defmask = ''
         
-        # Determine the number of bytes in the network part
         net_bytes = ord(ipclass) - ord('A') + 1
         
-        # Construct the NetID and Default Mask
         for i in range(net_bytes):
             netid += allbytes[i] + '.'
             defmask += '255.'
         netid = netid[:-1]
         
-        # Calculate the default host part for the given class
         hostid = '.'.join(allbytes[net_bytes:])
 
-        # Default first and last address
         firstaddr = netid + '.' + '.'.join(['0'] * (4 - net_bytes))
         lastaddr = netid + '.' + '.'.join(['255'] * (4 - net_bytes))
 
         defmask = defmask + '.'.join(['0'] * (4 - net_bytes))
 
-        # Get the number of subnets
         subnets = int(input("Number of subnets: "))
         
-        # Calculate the number of bits needed for subnets
         subnet_bits = (subnets - 1).bit_length()
         
-        # Custom subnet mask
         custom_mask = '1' * (8 * net_bytes + subnet_bits) + '0' * (32 - (8 * net_bytes + subnet_bits))
         custom_subnet_mask = bin_octets_to_ip(custom_mask)
         
-        # Calculate the number of hosts per subnet
-        num_hosts_per_subnet = 2 ** (32 - (8 * net_bytes + subnet_bits)) - 2
+        host_bits = 32 - (8 * net_bytes + subnet_bits)
+        num_hosts_per_subnet = 2 ** host_bits - 2
 
-        # Calculate subnets and corresponding address ranges
+        block_size = 2 ** host_bits
+
         print(f"\nCustom Subnet Mask: {custom_subnet_mask}")
         print(f"Number of Hosts per Subnet: {num_hosts_per_subnet}")
         
-        # Generate subnet address ranges
+        network_prefix = ip_to_bin_octets(netid)[:8 * net_bytes]
+        
         for i in range(subnets):
-            base_subnet = ip_to_bin_octets(netid)[:8 * net_bytes + subnet_bits] + f'{i:0{32 - (8 * net_bytes + subnet_bits)}b}'
-            subnet_first_ip = base_subnet[:-len(f'{num_hosts_per_subnet:b}')] + '0' * len(f'{num_hosts_per_subnet:b}')
-            subnet_last_ip = base_subnet[:-len(f'{num_hosts_per_subnet:b}')] + '1' * len(f'{num_hosts_per_subnet:b}')
+            subnet_prefix = network_prefix + format(i, f'0{subnet_bits}b')
+            
+            first_host = subnet_prefix + '0' * host_bits
+            first_usable = bin(int(first_host, 2) + 1)[2:].zfill(32)
+            
+            last_host = subnet_prefix + '1' * host_bits
+            last_usable = bin(int(last_host, 2) - 1)[2:].zfill(32)
             
             print(f"Subnet {i + 1}:")
-            print(f"  First Address: {bin_octets_to_ip(subnet_first_ip)}")
-            print(f"  Last Address: {bin_octets_to_ip(subnet_last_ip)}\n")
+            print(f"  Network Address: {bin_octets_to_ip(first_host)}")
+            print(f"  First Usable Address: {bin_octets_to_ip(first_usable)}")
+            print(f"  Last Usable Address: {bin_octets_to_ip(last_usable)}")
+            print(f"  Broadcast Address: {bin_octets_to_ip(last_host)}\n")
         
         return f"Class = {ipclass} \nNetid = {netid} \nHostid = {hostid} \nDefault mask = {defmask} \nFirst address = {firstaddr} \nLast address = {lastaddr}"
 
